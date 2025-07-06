@@ -75,31 +75,41 @@
 .button:hover {
   background:rgba(88, 89, 92, 0.29);
 }
-.menu{
-      width: 30%;          
-      max-width: 40%;   
-      padding: 8px 12px 8px 16px;
-      gap: 8px;
-      background-color:white;
-      border:none;
-      border-radius: 8px;
-}
-.button_menu{
-  border:none;
-  background:none;
-  font-size: 20px;
-  margin: 10px;
-}
-.button_menu:hover,.button_menu:focus{
-  color:blue;
-}
-.pic{
-   margin-top:3em; 
-   height=100%;
-   width: 50em;
-   border-radius: 15px;
-   margin-left:5px;
-}
+  table {
+    border-collapse: collapse;
+    width: 60%;
+    margin:auto;
+    margin-top:2em;
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+  .listButton{
+    background-color:white;
+    color:rgba(36, 190, 49, 0.81);
+    border:none;
+  }
+  .listButton:hover{
+    color:rgba(22, 127, 31, 0.81);
+    border: #000;
+  }
+  .tabletitle{
+    margin:auto;
+    margin-top: 5em;
+    text-align: center;
+  }
+  .tabletitle2{
+    margin:auto;
+    margin-top: 5em;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
@@ -119,7 +129,7 @@
       <path d="M4.04 7.43a4 4 0 0 1 7.92 0 .5.5 0 1 1-.99.14 3 3 0 0 0-5.94 0 .5.5 0 1 1-.99-.14M4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm1 .5v3h6v-3h-1v.5a.5.5 0 0 1-1 0V10z"/>
       <path d="M6 2.341V2a2 2 0 1 1 4 0v.341c.465.165.904.385 1.308.653l.416-1.247a1 1 0 0 1 1.748-.284l.77 1.027a1 1 0 0 1 .15.917l-.803 2.407C13.854 6.49 14 7.229 14 8v5.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5V8c0-.771.146-1.509.41-2.186l-.802-2.407a1 1 0 0 1 .15-.917l.77-1.027a1 1 0 0 1 1.748.284l.416 1.247A6 6 0 0 1 6 2.34ZM7 2v.083a6 6 0 0 1 2 0V2a1 1 0 1 0-2 0m5.941 2.595.502-1.505-.77-1.027-.532 1.595q.447.427.8.937M3.86 3.658l-.532-1.595-.77 1.027.502 1.505q.352-.51.8-.937M8 3a5 5 0 0 0-5 5v5.5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5V8a5 5 0 0 0-5-5"/>
   </svg>
-  <?php $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+  <?php $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
   $jsonString= file_get_contents("export.json");
   $data= json_decode($jsonString,true);
   $students = $data['students']; 
@@ -130,22 +140,65 @@
   <span class="lable"><?php echo $stud_num; ?></span>
 </button>
 </div>
-<div style="display: flex; align-items: center;margin-top:5em;">
-  <img class="pic" src="gptimage.png" alt="Image" style=" border-radius: 15px;">
-  <div class="menu" style="margin-left: 2em;">
-    <h1>Keimenoooooooooooooooooooooooooo</h1>
-    <form action="subjList.php" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <button class="button_menu" type="submit">Προβολή θεμάτων</button>
-    </form>
-    <form action="subjStat.php" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <button class="button_menu" type="submit">Κατάσταση Διπλωματικών</button>
-    </form>
-    <form action="subjList.php" method="post">
-      <button class="button_menu" type="submit">Διαχείρηση Διπλωματικών</button>
-    </form>
-  </div>
-</div>
+<?php
+$jsonString = file_get_contents("dipl.json");
+$data = json_decode($jsonString, true);
+
+if (isset($data['subjects']) && is_array($data['subjects'])) {
+    $subjects = $data['subjects'];
+  
+    
+      
+        echo "<h1 class='tabletitle'>Οι διπλωματικές μου</h1>";
+        echo "<table border='1' style='border-collapse: collapse;'>
+        <tr>
+          <th>Κωδικός</th>
+          <th>Θέμα</th>
+          <th>Καθηγητής</th>
+          <th>Κατάσταση</th>
+          <th>Ενέργεια</th>
+        </tr>";
+    foreach ($subjects as $subject) {
+      if ($subject['student_number']==$stud_num){
+        echo "<tr>
+          <td>" . htmlspecialchars($subject['id']) . "</td>
+          <td>" . htmlspecialchars($subject['name']) . "</td>
+          <td>" . htmlspecialchars($subject['professor_surname']) . "</td>
+          <td>" . htmlspecialchars($subject['status']) . "</td>
+          <td><button class='listButton'><svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>
+                <path d='M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1'/>
+                </svg></button></td>
+        </tr>";
+    }
+        echo "</table>";
+      }
+  }
+
+    echo "<h1 class='tabletitle2'>Θέματα:</h1>";
+    echo "<table border='1' style='border-collapse: collapse;'>
+      <tr>
+        <th>Κωδικός</th>
+        <th>Θέμα</th>
+        <th>Καθηγητής</th>
+        <th>Ενέργεια</th>
+      </tr>";
+      
+      
+    foreach ($subjects as $subject) {
+        echo "<tr>
+          <td>" . htmlspecialchars($subject['id']) . "</td>
+          <td>" . htmlspecialchars($subject['name']) . "</td>
+          <td>" . htmlspecialchars($subject['professor_surname']) . "</td>
+          <td><button class='listButton'><svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>
+                <path d='M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1'/>
+                </svg></button></td>
+        </tr>";
+    }
+
+    echo "</table>";
+  
+?>
+
+
 </body>
 </html>

@@ -25,14 +25,10 @@
     </style>
   </head>
 <body>
-        
-
     <form class="form" method="POST" action="loginScr.php">
-        
         <div class="btn">
-        <button class="button1">Σύνδεση στο Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπηστιμίου Πατρών</button>
+        <button class="button1">Σύνδεση στο Σύστημα Υποστήριξης Διπλωματικών Εργασιών</button>
         </div>       
     </form>
-    
 </body>
 </html>
