@@ -1,4 +1,8 @@
-[
+{
+    "code": 1,
+    "message": "Retrieved successfully",
+    "announcements": 
+    [
     {
        "id": 1,
        "title": "Νέα Λειτουργία",
@@ -80,3 +84,4 @@
     }
           
     ]
+}

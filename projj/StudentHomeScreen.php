@@ -100,8 +100,78 @@
    border-radius: 15px;
    margin-left:5px;
 }
+.announcement-sidebar {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 300px;
+  height: calc(100vh - 80px);
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.announcement-header {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.announcement-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.announcement-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.announcement-item:hover {
+  background-color:rgb(209, 206, 206);
+}
+
+.announcement-title {
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-bottom: 5px;
+  color: #0073b7;
+}
+
+.announcement-message {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.announcement-date {
+  font-size: 0.8em;
+  color: #777;
+  text-align: right;
+  margin-top: 6px;
+}
+
+.announcement-item.info {
+  border-left: 5px solid #3498db;
+}
+
+.announcement-item.warning {
+  border-left: 5px solid #f39c12;
+  background-color:rgb(240, 204, 146);
+}
+
+.announcement-item.alert {
+  border-left: 5px solid #e74c3c;
+  background-color:rgb(243, 179, 179);
+}
 </style>
 </head>
+
 <body>
 
 <div class="top-menu">
@@ -130,22 +200,51 @@
   <span class="lable"><?php echo $stud_num; ?></span>
 </button>
 </div>
+
 <div style="display: flex; align-items: center;margin-top:5em;">
   <img class="pic" src="gptimage.png" alt="Image" style=" border-radius: 15px;">
   <div class="menu" style="margin-left: 2em;">
-    <h1>Keimenoooooooooooooooooooooooooo</h1>
+    <h1>Keimenooo</h1>
     <form action="subjList.php" method="post">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
       <button class="button_menu" type="submit">Προβολή θεμάτων</button>
     </form>
-    <form action="subjStat.php" method="post">
+    <form action="subj.php" method="post">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <button class="button_menu" type="submit">Κατάσταση Διπλωματικών</button>
-    </form>
-    <form action="subjList.php" method="post">
       <button class="button_menu" type="submit">Διαχείρηση Διπλωματικών</button>
     </form>
+    <form action="subjMater.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
+      <button class="button_menu" type="submit">Υλικό Διπλωματικής</button>
+    </form>
+  </div>
+  
+  <div class="announcement-sidebar">
+  <div class="announcement-header">Ανακοινώσεις</div>
+  <div class="announcement-list" id="announcementList">
   </div>
 </div>
+
+<script>
+fetch('announcements.json')
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById('announcementList');
+    data.announcements.forEach(item => {
+      const div = document.createElement('div');
+      div.className = `announcement-item ${item.type}`;
+      div.innerHTML = `
+        <div class="announcement-title">${item.title}</div>
+        <div class="announcement-message">${item.message}</div>
+        <div class="announcement-date">${item.date}</div>
+      `;
+      container.appendChild(div);
+    });
+  })
+  .catch(error => {
+    console.error("Σφάλμα φόρτωσης ανακοινώσεων:", error);
+  });
+</script>
+
 </body>
 </html>
