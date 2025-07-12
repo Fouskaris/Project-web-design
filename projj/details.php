@@ -54,7 +54,7 @@
 
 .buttonNotif{
   position:absolute;
-  right: 1px;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +82,47 @@
   background:rgba(88, 89, 92, 0.29);
 }
 
+.container {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  background-color: white;
+  box-sizing: border-box;
+  min-height: 80vh;
+}
+
+.card {
+  position: relative;
+  width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 8px 14px;
+  background-color: rgba(36, 190, 49, 0.81);
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: rgba(22, 127, 31, 0.81);
+}
+
 </style>
 </head>
 
@@ -97,9 +138,38 @@
 </button>
 </div>
 
-<?php $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+<?php
+$id = isset($_POST['ia']) ? (int)$_POST['ia'] : null;
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
+
+if ($id !== null && $data && isset($data['subjects']) && is_array($data['subjects'])) {
+  $subjectFound = null;
+
+  foreach ($data['subjects'] as $subject) {
+    if ($subject['id'] == $id) {
+      $subjectFound = $subject;
+      break;
+    }
+  }
+
+  if ($subjectFound) {
+    echo '<div class="container">';
+    echo '<div class="card">';
+    echo '<strong>Τίτλος:</strong> ' . htmlspecialchars($subjectFound['name']) . '<br>';
+    echo '<strong>Περιγραφή:</strong> ' . htmlspecialchars($subjectFound['description']) . '<br>';
+    echo '<strong>Επιβλέπων:</strong> ' . htmlspecialchars($subjectFound['professor_surname']) . '<br>';
+    echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subjectFound['student_number']) . '<br>';
+    echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subjectFound['status']) . '<br>';
+    echo '<button class="button" onclick="history.back()">Επιστροφή</button>';
+    echo '</div>';
+    echo '</div>';
+  } else {
+    echo "<div class='container'><p>Δεν βρέθηκε θέμα με ID: <strong>$id</strong>.</p></div>";
+  }
+} else {
+  echo '<div class="container"><p>Δεν δόθηκε έγκυρο ID ή δεν υπάρχουν δεδομένα.</p></div>';
+}
 ?>
 
 </body>
