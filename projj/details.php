@@ -143,7 +143,7 @@ $id = isset($_POST['ia']) ? (int)$_POST['ia'] : null;
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
 
-if ($id !== null && $data && isset($data['subjects']) && is_array($data['subjects'])) {
+if ($id !== null && isset($data['subjects']) && is_array($data['subjects'])) {
   $subjectFound = null;
 
   foreach ($data['subjects'] as $subject) {
