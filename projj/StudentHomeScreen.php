@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπηστιμίου Πατρών</title>
+<title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
 <style>
   body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
+  
   .top-menu {
     background-color: whitesmoke;
     color: black;
@@ -20,6 +21,7 @@
     width: 100%;
     box-sizing: border-box;
   }
+  
   .menu-title {
     font-size: 30px;
   }
@@ -29,10 +31,12 @@
   font-size: 30px;
   margin-top:15px;
 }
+  
   .button1 svg{
     width: 100px; 
     height: 100px;
   }
+  
 .button {
   margin-left: auto;
   display: flex;
@@ -47,6 +51,7 @@
   border-radius: 20px;
   cursor: pointer;
 }
+  
 .buttonNotif{
   position:absolute;
   right: 1px;
@@ -58,11 +63,11 @@
   border: 1px solid rgba(78, 79, 81, 0.81);
   height: 40px;
   width: 60px;
-
   background:white;
   border-radius: 20px;
   cursor: pointer;
 }
+  
 .buttonNotif:hover {
   background:rgba(88, 89, 92, 0.29);
 }
@@ -75,6 +80,7 @@
 .button:hover {
   background:rgba(88, 89, 92, 0.29);
 }
+  
 .menu{
       width: 30%;          
       max-width: 40%;   
@@ -84,15 +90,18 @@
       border:none;
       border-radius: 8px;
 }
+  
 .button_menu{
   border:none;
   background:none;
   font-size: 20px;
   margin: 10px;
 }
+  
 .button_menu:hover,.button_menu:focus{
   color:blue;
 }
+  
 .pic{
    margin-top:3em; 
    height=100%;
@@ -100,6 +109,7 @@
    border-radius: 15px;
    margin-left:5px;
 }
+  
 .announcement-sidebar {
   position: fixed;
   top: 80px;
@@ -125,6 +135,7 @@
 .announcement-list {
   overflow-y: auto;
   flex: 1;
+  padding-bottom: 60px;
 }
 
 .announcement-item {
@@ -169,6 +180,57 @@
   border-left: 5px solid #e74c3c;
   background-color:rgb(243, 179, 179);
 }
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 2px;
+  flex-wrap: wrap; /*κουμπιά πηγαίνουν σε δεύτερη γραμμή αν δεν χωράνε*/
+}
+
+.footer-button,
+.footer-link {
+  font-size: 16px;
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 15px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  text-align: center;
+}
+
+.footer-button:hover,
+.footer-link:hover {
+  background: rgba(88, 89, 92, 0.29);
+}
+
+.logout-button {
+  border: 1px solid red;
+  color: red;
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.helpdesk-button {
+  border: 1px solid #0073b7;
+  color: #0073b7;
+  background-color: white;
+}
+
+.helpdesk-button:hover {
+  background-color: rgba(0, 115, 183, 0.1);
+}
+  
 </style>
 </head>
 
@@ -223,6 +285,16 @@
   <div class="announcement-header">Ανακοινώσεις</div>
   <div class="announcement-list" id="announcementList">
   </div>
+
+  <div class="bottom-menu">
+  <a class="footer-button helpdesk-button" href="https://helpdesk.upnet.gr/" target="_blank">
+    Επικοινωνία με Helpdesk για πρόβλημα σύνδεσης
+  <a class="footer-link" href="https://eclass.upatras.gr/" target="_blank">eClass Upatras</a>
+  <a class="footer-link" href="https://www.upatras.gr/" target="_blank">Πανεπιστήμιο Πατρών</a>
+  <button class="footer-button logout-button" onclick="window.location.href='loginScr.php'">Αποσύνδεση</button>
+  </a>
+  </div>
+    
 </div>
 
 <script>
