@@ -1,0 +1,84 @@
+{
+    "code": 1,
+    "message": "Retrieved successfully",
+    "subjects": [
+        {
+            "id": "1",
+            "name": "Ανάπτυξη Εφαρμογής Ανίχνευσης Ψευδών Ειδήσεων με Χρήση NLP και Machine Learning",
+            "description": "Σχεδίαση και υλοποίηση ενός συστήματος που λαμβάνει άρθρα και εντοπίζει αν πρόκειται για ψευδείς ειδήσεις με χρήση τεχνικών φυσικής γλώσσας (NLP) και αλγορίθμων μηχανικής μάθησης.",
+            "professor_surname": "Bartzokas",
+            "professor_id": "56",
+            "student_number": "10433999",
+            "status": "Ενεργή",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Σχεδίαση και Υλοποίηση Έξυπνου Συστήματος Προτάσεων Μαθημάτων με Χρήση Συστημάτων Συστάσεων",
+            "description": "Σχεδίαση και Υλοποίηση Έξυπνου Συστήματος Προτάσεων Μαθημάτων με Χρήση Συστημάτων Συστάσεων",
+            "professor_surname": "koutsikos",
+            "professor_id": "35",
+            "student_number": "0",
+            "status": "Διαθέσιμη",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Ανάπτυξη Αλγορίθμων Μηχανικής Μάθησης για Ανίχνευση Ανωμαλιών σε Δίκτυα",
+            "description": "Μελέτη και υλοποίηση μεθόδων για την αυτόματη ανίχνευση ασυνήθιστης δραστηριότητας σε δίκτυα υπολογιστών.",
+            "professor_surname": "Makaveli",
+            "professor_id": "14",
+            "student_number": "0",
+            "status": "Διαθέσιμη",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        },
+        {
+            "id": "4",
+            "name": "Ανάλυση και Βελτιστοποίηση Αλγορίθμων Ταξινόμησης Μεγάλων Δεδομένων",
+            "description": "Έρευνα σε αλγόριθμους που επιτρέπουν την γρήγορη και ακριβή ταξινόμηση δεδομένων σε μεγάλα σύνολα (big data).",
+            "professor_surname": "Musk",
+            "professor_id": "29",
+            "student_number": "0",
+            "status": "Διαθέσιμη",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        },
+        {
+            "id": "5",
+            "name": "Εφαρμογή Τεχνητής Νοημοσύνης για Αυτόματη Αναγνώριση Φωνής σε Ελληνικά",
+            "description": "Ανάπτυξη μοντέλου φωνητικής αναγνώρισης ειδικά για την ελληνική γλώσσα, με χρήση νευρωνικών δικτύων.",
+            "professor_surname": "Fousekis",
+            "professor_id": "32",
+            "student_number": "0",
+            "status": "Ενεργή",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        },
+        {
+            "id": "6",
+            "name": "Ασφάλεια Εφαρμογών Κινητών: Ανάλυση Ευπαθειών και Προτάσεις Βελτίωσης",
+            "description": "Μελέτη των πιο συχνών ευπαθειών σε εφαρμογές Android ή iOS και σχεδιασμός πρακτικών βελτίωσης.",
+            "professor_surname": "Fousekis",
+            "professor_id": "32",
+            "student_number": "0",
+            "status": "Διαθέσιμη",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ]
+        }
+    ]
+}
