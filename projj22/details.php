@@ -161,6 +161,11 @@ if ($id !== null && isset($data['subjects']) && is_array($data['subjects'])) {
     echo '<strong>Επιβλέπων:</strong> ' . htmlspecialchars($subjectFound['professor_surname']) . '<br>';
     echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subjectFound['student_number']) . '<br>';
     echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subjectFound['status']) . '<br>';
+
+    if ($subjectFound['status'] !== 'Διαθέσιμη' && !empty($subjectFound['assignment_date'])) {
+        echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subjectFound['assignment_date']) . '<br>';
+    }
+    
     echo '<button class="button" onclick="history.back()">Επιστροφή</button>';
     echo '</div>';
     echo '</div>';
