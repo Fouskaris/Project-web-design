@@ -173,11 +173,11 @@
 <?php
 $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $studentData = json_decode(file_get_contents("export.json"), true);
-$students = $studentData['students'];
+$students = &$studentData['students'];
 $stud_num = "";
-foreach ($students as $student) {
+foreach ($students as &$student) {
     if ($student['id'] == $id) {
-      $studentFound=$student;
+      $studentFound=&$student;
       break;
     }
 }
@@ -212,7 +212,8 @@ if (empty($student['notifications'])) {
     echo "Δεν υπάρχουν Ειδοποιήσεις";
 } else {
   echo '<div class="card">';
-  foreach ($student["notifications"] as $notif) {
+  foreach ($studentFound["notifications"] as&$notif) {
+    if ($notif["seen"] == "no") {$notif["seen"] = "yes";}
     $profData = json_decode(file_get_contents("export.json"), true);
     $professors = $profData['professors'];
   foreach ($professors as $professor) {
@@ -235,7 +236,8 @@ if (empty($student['notifications'])) {
   }
 }
   echo '</div>';
-}
+}   
+file_put_contents("export.json", json_encode($studentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 ?>
 
 <button type="button" class="button" onclick="history.back()">Επιστροφή</button>
