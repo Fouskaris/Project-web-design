@@ -49,7 +49,7 @@
 }
 .buttonNotif{
   position:absolute;
-  right: 1px;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,8 +143,6 @@ $data = json_decode($jsonString, true);
 
 if (isset($data['subjects']) && is_array($data['subjects'])) {
     $subjects = $data['subjects'];
-  
-    
       
         echo "<h1 class='tabletitle'>Οι διπλωματικές μου</h1>";
         echo "<table border='1' style='border-collapse: collapse;'>
@@ -153,6 +151,7 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
           <th>Θέμα</th>
           <th>Καθηγητής</th>
           <th>Κατάσταση</th>
+          <th>Ημερομηνία Ανάθεσης</th>
           <th>Ενέργεια</th>
         </tr>";
     foreach ($subjects as $subject) {
@@ -162,8 +161,13 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
           <td>" . htmlspecialchars($subject['id']) . "</td>
           <td>" . htmlspecialchars($subject['name']) . "</td>
           <td>" . htmlspecialchars($subject['professor_surname']) . "</td>
-          <td>" . htmlspecialchars($subject['status']) . "</td>
-          <td>
+          <td>" . htmlspecialchars($subject['status']) . "</td>";
+          if ($subject['status'] !== 'Διαθέσιμη') {
+      echo "<td>" . htmlspecialchars($subject['assignment_date']) . "</td>";
+    } else {
+      echo "<td>-</td>";
+    }
+          echo "<td>
             <form action='details.php' method='post'>
             <input type='hidden' name='ia' value='$idSubj'><button class='listButton' type='submit'>
             <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>
@@ -171,8 +175,8 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
             </svg></button></form></td>
         </tr>";
     }
+  }
         echo "</table>";
-      }
   }
 
     echo "<h1 class='tabletitle2'>Θέματα:</h1>";
@@ -186,6 +190,7 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
       
       
     foreach ($subjects as $subject) {
+    if ($subject['status'] === 'Διαθέσιμη') {
       $idSubj=$subject['id'];
         echo "<tr>
           <td>" . htmlspecialchars($subject['id']) . "</td>
@@ -199,7 +204,7 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
             </svg></button></form></td>
         </tr>";
     }
-
+  }
     echo "</table>";
   
 ?>
