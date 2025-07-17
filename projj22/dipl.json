@@ -10,12 +10,13 @@
             "professor_id": "56",
             "student_number": "10433999",
             "status": "Ενεργή",
+            "assignment_date": "2025-02-01",
             "file": [
                 "topic.pdf",
-                "important_files.pdf"
+                "important_files.pdf",
+                "tickets_5488738821.pdf"
             ],
-            "requests": [
-            ]
+            "requests": []
         },
         {
             "id": "2",
@@ -25,6 +26,7 @@
             "professor_id": "35",
             "student_number": "0",
             "status": "Διαθέσιμη",
+            "assignment_date": null,
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
@@ -39,6 +41,7 @@
             "professor_id": "14",
             "student_number": "0",
             "status": "Διαθέσιμη",
+            "assignment_date": null,
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
@@ -53,6 +56,7 @@
             "professor_id": "29",
             "student_number": "0",
             "status": "Διαθέσιμη",
+            "assignment_date": null,
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
@@ -67,6 +71,7 @@
             "professor_id": "32",
             "student_number": "10434004",
             "status": "Ενεργή",
+            "assignment_date": "2025-06-01",
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
@@ -81,6 +86,7 @@
             "professor_id": "32",
             "student_number": "0",
             "status": "Διαθέσιμη",
+            "assignment_date": null,
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
