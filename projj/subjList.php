@@ -143,13 +143,9 @@ $data = json_decode($jsonString, true);
 
 if (isset($data['subjects']) && is_array($data['subjects'])) {
     $subjects = $data['subjects'];
-  
-    
-      
-        echo "<h1 class='tabletitle'>Οι διπλωματικές μου</h1>";
+        echo "<h1 class='tabletitle'>Η διπλωματική μου</h1>";
         echo "<table border='1' style='border-collapse: collapse;'>
         <tr>
-          <th>Κωδικός</th>
           <th>Θέμα</th>
           <th>Καθηγητής</th>
           <th>Κατάσταση</th>

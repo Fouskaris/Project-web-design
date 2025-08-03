@@ -37,17 +37,23 @@
                            if(($professor['id']===$input_usr)){
                                 $foundprof=true;
                                 if ($input_pwd===$professor['id']){
-                                    require 'ProfessorHomeScreen.php';
+                                    $id= $professor['id'];
+                                    header('Location:ProfessorHomeScreen.php?id='.$id);
                                 }
                                 else {
                                     require 'WrongPassScr.php';
                                 }
                             }
                         }
-                    }elseif (isset($_POST['prof'])){
-                        //require; 
-                    }else require 'WrongPassScr.php';  
-                }
+                    }elseif (isset($_POST['secr'])){
+                        
+                                if ($input_pwd===$input_usr){
+                                    header('Location:SecretariatHomeScreen.php?');
+                                }
+                                else {
+                                    require 'WrongPassScr.php';
+                                }
+                    }}
         
 ?>
 </html>

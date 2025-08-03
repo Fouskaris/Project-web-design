@@ -99,13 +99,13 @@ $subjects = $data["subjects"];
     <th>Θέμα</th>
     <th>Καθηγητής</th>
     <th>Κατάσταση</th>
-    <th>Λεπτομέρειες</th>
+    <th>Ενέργεια</th>
   </tr>
 
 <?php
 foreach ($subjects as $subject) {
     $status = $subject['status'];
-    if ($status === "Ενεργή" || $status === "Υπό Εξέταση") {
+    if ($status === "Ενεργή") {
         $id = $subject['id'];
         echo "<tr>
             <td>" . htmlspecialchars($id) . "</td>
@@ -113,7 +113,27 @@ foreach ($subjects as $subject) {
             <td>" . htmlspecialchars($subject['professor_surname']) . "</td>
             <td>" . htmlspecialchars($status) . "</td>
             <td>
-              <form action='details.php' method='post'>
+              <form action='Active.php' method='post'>
+                <input type='hidden' name='ia' value='" . htmlspecialchars($id) . "'>
+                <button class='listButton' type='submit'>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>
+                    <path d='M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1'/>
+                  </svg>
+                </button>
+              </form>
+            </td>
+          </tr>";
+    }
+
+        if ($status === "Υπό Εξέταση") {
+        $id = $subject['id'];
+        echo "<tr>
+            <td>" . htmlspecialchars($id) . "</td>
+            <td>" . htmlspecialchars($subject['name']) . "</td>
+            <td>" . htmlspecialchars($subject['professor_surname']) . "</td>
+            <td>" . htmlspecialchars($status) . "</td>
+            <td>
+              <form action='Under_eval.php' method='post'>
                 <input type='hidden' name='ia' value='" . htmlspecialchars($id) . "'>
                 <button class='listButton' type='submit'>
                   <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>

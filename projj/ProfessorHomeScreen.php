@@ -192,7 +192,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px 2px;
-  flex-wrap: wrap; /*κουμπιά πηγαίνουν σε δεύτερη γραμμή αν δεν χωράνε*/
+  flex-wrap: wrap; 
 }
 
 .footer-button,
@@ -234,9 +234,19 @@
 
 </style>
 </head>
-
-<body>
-
+<?php
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$jsonString = file_get_contents("export.json");
+$data = json_decode($jsonString, true);
+$professors = $data['professors'];
+foreach ($professors as $professor) {
+  if ($professor['id'] == $id) {
+    $last_name = $professor['surname'];
+  }
+}
+?>
+<body> 
+<form action="proffileScr.php" method="post">
 <div class="top-menu">
   <img src="upatrasLogo.jpg" alt="Image" style="display: block; margin: 0px; width: 10em;">
   <div class="menu-title">Σύστημα Υποστήριξης Διπλωματικών Εργασιών</div>
@@ -244,28 +254,33 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
       <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
     </svg>
-    
   </svg>
+<input type="hidden" name="id" value="<?php echo $id; ?>">
 </button>
     <button class="button">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backpack3" viewBox="0 0 16 16">
       <path d="M4.04 7.43a4 4 0 0 1 7.92 0 .5.5 0 1 1-.99.14 3 3 0 0 0-5.94 0 .5.5 0 1 1-.99-.14M4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm1 .5v3h6v-3h-1v.5a.5.5 0 0 1-1 0V10z"/>
       <path d="M6 2.341V2a2 2 0 1 1 4 0v.341c.465.165.904.385 1.308.653l.416-1.247a1 1 0 0 1 1.748-.284l.77 1.027a1 1 0 0 1 .15.917l-.803 2.407C13.854 6.49 14 7.229 14 8v5.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5V8c0-.771.146-1.509.41-2.186l-.802-2.407a1 1 0 0 1 .15-.917l.77-1.027a1 1 0 0 1 1.748.284l.416 1.247A6 6 0 0 1 6 2.34ZM7 2v.083a6 6 0 0 1 2 0V2a1 1 0 1 0-2 0m5.941 2.595.502-1.505-.77-1.027-.532 1.595q.447.427.8.937M3.86 3.658l-.532-1.595-.77 1.027.502 1.505q.352-.51.8-.937M8 3a5 5 0 0 0-5 5v5.5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5V8a5 5 0 0 0-5-5"/>
   </svg>
-  <span class="lable">Καθηγητής</span>
+  <span class="lable"><?php echo $last_name; ?></span>
 </button>
+</form>
+</div>
 </div>
 <div style="display: flex; align-items: center;margin-top:5em;">
   <img class="pic" src="uniprof.png" alt="Image" style=" border-radius: 15px;">
   <div class="menu" style="margin-left: 2em;">
     <h1>Keimenoooooooooo</h1>
-    <form action=".php" method="post">
-      <button class="button_menu" type="submit">Προβολή θεμάτων</button>
+    <form action="subjCre.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
+      <button class="button_menu" type="submit">Δημιουργία και Ανάθεση Θεμάτος </button>
     </form>
-    <form action="subjList.php" method="post">
+    <form action="subjStatus.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
       <button class="button_menu" type="submit">Κατάσταση Διπλωματικών</button>
     </form>
-    <form action="subjList.php" method="post">
+    <form action="subjHandling.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
       <button class="button_menu" type="submit">Διαχείρηση Διπλωματικών</button>
     </form>
   </div>

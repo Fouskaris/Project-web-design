@@ -131,7 +131,7 @@ if (!empty($thesis['assignment_date']) && $thesis['assignment_date'] !== '0000-0
   </div>
 
   <div class="row">
-    <span class="label">Περίληψη:</span>
+    <span class="label">Περιγραφή:</span>
     <span class="value"><?= nl2br(htmlspecialchars($thesis['summary'])) ?></span>
   </div>
 
@@ -174,5 +174,4 @@ if (!empty($thesis['assignment_date']) && $thesis['assignment_date'] !== '0000-0
 
 </body>
 </html>
-
 

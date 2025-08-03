@@ -31,4 +31,25 @@
         </div>       
     </form>
 </body>
+<?php
+/*
+$jsonFile = 'export.json';
+$jsonData = file_get_contents($jsonFile);
+
+$data = json_decode($jsonData, true);
+
+if (isset($data['professors']) && is_array($data['professors'])) {
+    foreach ($data['professors'] as &$professor) {
+        if (!isset($professor['notifications'])) {
+            $professor['notifications'] = []; 
+        }
+    }
+
+    file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    echo "Notifications success";
+} else {
+    echo "fail";
+}*/
+
+?>
 </html>
