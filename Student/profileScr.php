@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <?php
+
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit;
+}
+$id = $_SESSION['id'];
+
+?>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -171,7 +182,6 @@
 </div>
 <h1 class="Pageheader">Προφίλ</h1>
 <?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $studentData = json_decode(file_get_contents("export.json"), true);
 $students = &$studentData['students'];
 $stud_num = "";
@@ -244,5 +254,6 @@ file_put_contents("export.json", json_encode($studentData, JSON_PRETTY_PRINT | J
 
 </body>
 </html>
+
 
 
