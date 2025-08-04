@@ -1,141 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .top-menu {
-    background-color: whitesmoke;
-    color: black;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .menu-title {
-    font-size: 30px;
-  }
- 
-  .button1 {
-  margin-left: auto;
-  font-size: 30px;
-  margin-top:15px;
-}
-  
-  .button1 svg{
-    width: 100px; 
-    height: 100px;
-  }
-  
-.button {
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 12px 8px 16px;
-  gap: 8px;
-  height: 40px;
-  width: 250px;
-  border: none;
-  background:white;
-  border-radius: 20px;
-  cursor: pointer;
-}
-  
-.buttonNotif{
-  position:absolute;
-  right: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 12px 8px 12px;
-  gap: 8px;
-  border: 1px solid rgba(78, 79, 81, 0.81);
-  height: 40px;
-  width: 60px;
-  background:white;
-  border-radius: 20px;
-  cursor: pointer;
-  z-index: 1;
-}
-  
-.buttonNotif:hover {
-  background:rgba(88, 89, 92, 0.29);
-}
 
-.lable {
-  font-size: 20px;
-  color:black;
-}
-
-.button:hover {
-  background:rgba(88, 89, 92, 0.29);
-}
-  
-.menu{
-      width: 30%;          
-      max-width: 40%;   
-      padding: 8px 12px 8px 16px;
-      gap: 8px;
-      background-color:white;
-      border:none;
-      border-radius: 8px;
-}
-  
-.button_menu{
-  border:none;
-  background:none;
-  font-size: 20px;
-  margin: 10px;
-}
-  
-.button_menu:hover,.button_menu:focus{
-  color:blue;
-}
-  
-.pic{
-   margin-top:3em; 
-   height=100%;
-   width: 50em;
-   border-radius: 15px;
-   margin-left:5px;
-}
-  
-.announcement-sidebar {
-  position: fixed;
-  top: 80px;
-  right: 0;
-  width: 300px;
-  height: calc(100vh - 80px);
-  background-color: #fff;
-  border-left: 1px solid #ccc;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-.announcement-header {
-  padding: 15px;
-  font-weight: bold;
-  font-size: 20px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  text-align: center;
-}
-
-.announcement-list {
-  overflow-y: auto;
-  flex: 1;
   padding-bottom: 60px;
 }
 
@@ -235,7 +98,9 @@
   
 </style>
 </head>
-<?php $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+<?php 
+
   $jsonString= file_get_contents("export.json");
   $data= json_decode($jsonString,true);
   $students = $data['students']; 
@@ -246,6 +111,8 @@
       $stud_num = $student['student_number']; }
   }?>
 <body>
+  <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
+
 <form action="profileScr.php" method="post">
 <div class="top-menu">
   <img src="upatrasLogo.jpg" alt="Image" style="display: block; margin: 0px; width: 10em;">
