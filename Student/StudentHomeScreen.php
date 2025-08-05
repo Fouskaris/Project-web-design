@@ -318,8 +318,8 @@ $id = $_SESSION['id'];
     Επικοινωνία με Helpdesk για πρόβλημα σύνδεσης
   <a class="footer-link" href="https://eclass.upatras.gr/" target="_blank">eClass Upatras</a>
   <a class="footer-link" href="https://www.upatras.gr/" target="_blank">Πανεπιστήμιο Πατρών</a>
-  <button class="footer-button logout-button" onclick="window.location.href='loginScr.php'">Αποσύνδεση</button>
-  </a>
+<form method="POST" action="logout.php">
+  <button type="submit" class="footer-button logout-button">Αποσύνδεση</button></form>  </a>
   </div>
     
 </div>
@@ -347,3 +347,4 @@ fetch('announcements.json')
 
 </body>
 </html>
+
