@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['id'];
+
+?>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -152,5 +163,6 @@ if ($subjectFound) {
 ?>
 
 </body>
+
 
 </html>
