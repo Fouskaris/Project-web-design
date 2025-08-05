@@ -5,7 +5,7 @@
 session_start();
 
 if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 $id = $_SESSION['id'];
@@ -254,6 +254,7 @@ file_put_contents("export.json", json_encode($studentData, JSON_PRETTY_PRINT | J
 
 </body>
 </html>
+
 
 
 
