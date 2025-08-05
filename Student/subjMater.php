@@ -4,11 +4,11 @@
 
 session_start();
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['Stud_id'])) {
     header('Location: loginScr.php');
     exit;
 }
-$id = $_SESSION['id'];
+$id = $_SESSION['Stud_id'];
 
 ?>
 <head>
@@ -228,3 +228,4 @@ function addFileInput() {
 
 </body>
 </html>
+
