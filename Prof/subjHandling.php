@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+
+if (!isset($_SESSION['Prof_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Prof_id'];
+
+?>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -273,5 +284,6 @@ echo "</table>";
 
 </body>
 </html>
+
 
 
