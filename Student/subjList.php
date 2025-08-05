@@ -5,7 +5,7 @@
 session_start();
 
 if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 $id = $_SESSION['id'];
@@ -215,3 +215,4 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
 
 </body>
 </html>
+
