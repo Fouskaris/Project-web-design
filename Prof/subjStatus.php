@@ -163,8 +163,21 @@ $id = $_SESSION['Prof_id'];
   flex-direction: column;
   justify-content: space-between;
 }
-.statTitle{
+.button2 {
+  margin-top: 1%;
+  bottom: 15px;
+  right: 15px;
+  padding: 8px 14px;
+  background-color: rgba(36, 49, 190, 0.81);
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+.button2:hover {
+  background-color: rgba(27, 22, 127, 0.81);
 }
 
 </style>
@@ -319,11 +332,12 @@ foreach ($subjects as $subject) {
   if($days_asMemb_counter> 0) {$avg_asMemb_days=($days_asMemb_counter/$member_counter);echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asMemb_days.' μέρες<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
   if($grade_asMemb_counter>0) {$avg_asMemb_grade=($grade_asMemb_counter/$member_counter);echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asMemb_grade, 2).'<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
   echo '<strong>Συνολικό πλήθος διπλωματικών:</strong>'.$member_counter.' Διπλωματικές';
+  echo '<form action="stats.php" method="post">
+    <button class="button2" type="submit">Αναλυτική Προβολή Στατιστικών</button>';
 ?>
 </div></div>
 
 </body>
 </html>
-
 
 
