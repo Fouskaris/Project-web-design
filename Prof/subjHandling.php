@@ -137,7 +137,6 @@ $id = $_SESSION['Prof_id'];
 </div>
 <h1 class="title">Διαχείρηση Κατάστασης Διπλωματικών</h1>
 <?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $jsonString = file_get_contents("export.json");
 $data = json_decode($jsonString, true);
 $professors = $data['professors'];
@@ -284,6 +283,5 @@ echo "</table>";
 
 </body>
 </html>
-
 
 
