@@ -9,7 +9,7 @@
             "professor_surname": "Bartzokas",
             "professor_id": "56",
             "student_number": "10433999",
-            "status": "Ενεργή",
+            "status": "Ακυρωμένη",
             "assignment_date": "2025-02-01",
             "file": [
                 "topic.pdf",
@@ -21,7 +21,11 @@
                 45
             ],
             "pres_date": "2025-07-25",
-            "grade": null
+            "grade": null,
+            "assignment_protocol": "6",
+            "cancel_protocol": "6",
+            "cancel_year": "33",
+            "cancel_reason": "Κατόπιν αίτησης φοιτητή\/τριας"
         },
         {
             "id": "2",
@@ -248,6 +252,42 @@
             "committee": [],
             "pres_date": null,
             "grade": 0
+        },
+        {
+            "id": "15",
+            "name": "Τεστ",
+            "description": "Τεστ",
+            "professor_surname": "Fousekis",
+            "professor_id": "32",
+            "student_number": "1",
+            "status": "Περατωμένη",
+            "assignment_date": "21-07-2023",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ],
+            "committee": [],
+            "pres_date": "30-07-2023",
+            "grade": 9
+        },
+        {
+            "id": "16",
+            "name": "Τεστ",
+            "description": "Τεστ",
+            "professor_surname": "Musk",
+            "professor_id": "29",
+            "student_number": "1",
+            "status": "Περατωμένη",
+            "assignment_date": "21-07-2023",
+            "file": [
+                "topic.pdf",
+                "important_files.pdf"
+            ],
+            "committee": [
+                32
+            ],
+            "pres_date": "30-07-2023",
+            "grade": 8
         }
     ]
 }

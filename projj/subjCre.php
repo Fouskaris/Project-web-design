@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+
+if (!isset($_SESSION['Prof_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Prof_id'];
+
+?>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -161,6 +172,9 @@
   text-decoration: none;
   display: block;
 }
+.title{
+        text-align: center;
+    } 
 
 .dropdown-content a:hover {background-color: #ddd;}
 
@@ -218,26 +232,37 @@ foreach ($professors as $professor) {
     $jsonString2 = file_get_contents("dipl.json");
     $data2 = json_decode($jsonString2, true);
     $subjects= $data2["subjects"];
+    $found=false;
+    foreach ($subjects as $subject) {
+      if (($subject["professor_id"] == $prof_id)&&($subject["status"] != "Περατωμένη")) {
+        $found=true;
+        break;
+      }}
+    if($found==true){
     foreach ($subjects as $subject) {
       if (($subject["professor_id"] == $prof_id)&&($subject["status"] != "Περατωμένη")) {
         $subj_id=$subject["id"];
         $subject_name=$subject["name"];
         echo "<input type='checkbox'  name='id' class='subjChoose' value='$subj_id' id='$subj_id' ><label  style='margin-top:2%;margin-bottom:2%;font-size:1em'for='$subj_id'>$subject_name</label><br>";
       }}
-    ?>
-    <label for="myfile1">1.</label>
-      <input type="file" id="myfile1" name="myfile[]"><br><br>  
+    echo"
+    <label for='myfile1'>1.</label>
+      <input type='file' id='myfile1' name='myfile[]'><br><br>  
     </div>
 
 
-    <div class="filebuts">
-      <button class="AddFileSpace" type="button" onclick="addFileInput()">
+    <div class='filebuts'>
+      <button class='AddFileSpace' type='button' onclick='addFileInput()'>
         <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
           <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/>
           <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'/>
         </svg>
       </button>
-    <button class="button" type="submit">Υποβολή Αρχείων</button>
+    <button class='button' type='submit'>Υποβολή Αρχείων</button>";
+    }else{
+      echo "<h2 class='title' >Δεν υπάρχουν μαθήματα για Υποβολή αρχείων</h1>";   
+    }
+    ?>
     </div></div>
     </form>
 

@@ -1,5 +1,17 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['Stud_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Stud_id'];
+
+?>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπηστιμίου Πατρών</title>
     <img src="upatrasLogo.jpg" alt="Centered Image" style="display: block; margin:  50px auto; width: 20em;">
     <hr style="border: 1px solid black; width: 50%;">
@@ -151,5 +163,6 @@ if ($subjectFound) {
 ?>
 
 </body>
+
 
 </html>

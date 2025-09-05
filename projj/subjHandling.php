@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+
+if (!isset($_SESSION['Prof_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Prof_id'];
+
+?>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -126,7 +137,6 @@
 </div>
 <h1 class="title">Διαχείρηση Κατάστασης Διπλωματικών</h1>
 <?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $jsonString = file_get_contents("export.json");
 $data = json_decode($jsonString, true);
 $professors = $data['professors'];
@@ -138,6 +148,13 @@ foreach ($professors as $professor) {
 $jsonString2 = file_get_contents("dipl.json");
 $data2 = json_decode($jsonString2, true);
 $subjects = $data2['subjects'];
+$found=false;
+foreach ($subjects as $subject) {
+    if (($subject['status'] != 'Περατωμένη') && ($subject['professor_id'] == $id)) {
+      $found=true;
+      break;
+    }}
+if($found==true){
 echo "<table border='1' style='border-collapse: collapse;'>
         <tr>
           <th>Θέμα</th>
@@ -155,14 +172,14 @@ foreach ($subjects as $subject) {
          echo "<td>" . "<form action='changeStatus.php' method='post'>
           <label>";
           if ($subject["status"] == "Διαθέσιμη") {
-            echo "<label><input type='radio' name='choise' value='1' checked>Διαθέσιμη</label><br>
-                  <label><input type='radio' name='choise' value='2'>Ενεργή</label><br>
-                  <label><input type='radio' name='choise' value='3'>Υπό Εξέταση</label><br>" . "</td>";
+            echo "<label><input type='radio' name='choice' value=1 checked>Διαθέσιμη</label><br>
+                  <label><input type='radio' name='choice' value=2 >Ενεργή</label><br>
+                  <label><input type='radio' name='choice' value=3 >Υπό Εξέταση</label><br>" . "</td>";
           }elseif ($subject["status"] == "Ενεργή") {
             echo "
-                  <label><input type='radio' name='choise' value='2'checked>Ενεργή</label><br>
-                  <label><input type='radio' name='choise' value='3'>Υπό Εξέταση</label><br>" ;
-            $exDate=$subject['assignment_date'];
+                  <label><input type='radio' name='choice' value=2 checked>Ενεργή</label><br>
+                  <label><input type='radio' name='choice' value=3 >Υπό Εξέταση</label><br>" ;
+                  $exDate=$subject['assignment_date'];
             if($exDate){
               $today = date("Y-m-d");
               $todayDate = new DateTime($today);
@@ -172,14 +189,15 @@ foreach ($subjects as $subject) {
               $subj_id=$subject["id"];
               if ($totalDays > 731) {
                 echo "<p style='color:red'>Έχουν περάσει πάνω από δύο χρόνια από την ημερομηνία ανάθεσης(". $totalDays ." μέρες)</p>
-                <label><input type='radio' name='choise' value='4'>Ακύρωση</label><br></td>";
+                <label><input type='radio' name='choice' value=4>Ακύρωση</label><br></td>";
               }
             }
           }elseif ($subject["status"] == "Υπό Εξέταση"){
-                  echo "<label><input type='radio' name='choise' value='1'>Διαθέσιμη</label><br>
-                  <label><input type='radio' name='choise' value='2'>Ενεργή</label><br>
-                  <label><input type='radio' name='choise' value='3' checked>Υπό Εξέταση</label><br>" . "</td>";
+                  echo "<label><input type='radio' name='choice' value=1>Διαθέσιμη</label><br>
+                  <label><input type='radio' name='choice' value=2>Ενεργή</label><br>
+                  <label><input type='radio' name='choice' value=3 checked>Υπό Εξέταση</label><br>" . "</td>";
                 }
+          $subj_id=$subject['id'];
           echo " <td>
             <input type='hidden' name='id' value='$subj_id'><button class='listButton' type='submit'>
             <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-arrow-right-square-fill' viewBox='0 0 16 16'>
@@ -187,9 +205,19 @@ foreach ($subjects as $subject) {
             </svg></button></form></td>";
     }}
     echo "</table>";
+  }else{
+      echo "<h2 class='title' >Δεν υπάρχουν μη περατωμένα μαθήματα</h1>";   
+  }
 ?>
 <h1 style="margin-top:1em;text-align: center;">Ανάθεση και Αλλαγή Διπλωματικών</h1>
 <?php
+$found=false;
+foreach ($subjects as $subject) {
+    if (($subject['status'] == 'Διαθέσιμη') && ($subject['professor_id'] == $id)) {
+      $found=true;
+      break;
+    }}
+if($found==true){
 echo "<table border='1' style='border-collapse: collapse;'>
         <tr>
           <th>Θέμα</th>
@@ -212,15 +240,24 @@ foreach ($subjects as $subject) {
     echo "<td><button class='listButton' type='submit'>Υποβολή</button></td>";
     echo "</form></tr>";}}
     echo "</table>";
-    echo "<h1 class='title'>Βαθμολόγηση Διπλωματικών</h1>";
+     }else{
+        echo "<h2 class='title' >Δεν υπάρχουν μαθήματα για ανάθεση ή αλλαγή</h1>";   
+       }    
+echo "<h1 class='title' >Βαθμολόγηση Διπλωματικών</h1>";
+$found=false;
+foreach ($subjects as $subject) {
+    if (($subject['status'] == 'Υπό Εξέταση') && ($subject['professor_id'] == $id)) {
+      $found=true;
+      break;
+    }}
+if($found==true){
 echo "<table border='1' style='border-collapse: collapse; margin-bottom:1em;'>
         <tr>
           <th>Θέμα</th>
           <th>Φοιτητής</th>
           <th>Βαθμός</th>
           <th>Ενέργεια</th>
-        </tr>";
-
+        </tr>"; 
 foreach ($subjects as $subject) {
     if (($subject["status"] == "Υπό Εξέταση") && ($subject["professor_id"] == $id)) {
         echo "<tr><form action='grade_subj.php' method='POST'>";
@@ -237,6 +274,9 @@ foreach ($subjects as $subject) {
 }
 
 echo "</table>";
+}else{
+  echo "<h2 class='title' >Δεν υπάρχουν μαθήματα για βαθμολόγηση</h1>";   
+}
 
     ?>
     

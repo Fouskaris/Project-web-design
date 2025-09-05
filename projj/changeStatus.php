@@ -1,6 +1,6 @@
 <?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
-$choice = isset($_POST['choise']) ? (int)$_POST['choise'] : null;
+$id = isset($_POST['id']) ? $_POST['id'] : null;
+$choice = isset($_POST['choice']) ? (int)$_POST['choice'] : null;
 
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
@@ -20,6 +20,8 @@ switch ($choice) {
     case 4:
         $status = 'Ακυρωμένη Από καθηγητή';
         break;
+        default:
+    die("Μη έγκυρη επιλογή.");
     };
     foreach ($subjects as &$subject) {
     if ($subject['id'] == $id) {

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ((isset($_SESSION['Stud_id']))||(isset($_SESSION['Prof_id']))) {
+    header('Location: StudentHomeScreen.php'); 
+    exit;
+}
+?>
 <html>
   <head>
   <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπηστιμίου Πατρών</title>

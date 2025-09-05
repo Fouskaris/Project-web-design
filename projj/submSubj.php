@@ -17,7 +17,7 @@ $newSubject=[
     "status"=>"Διαθέσιμη",
     "assignment_date"=> null,
     "file"=>[],
-    "commitee"=>[],
+    "committee"=>[],
     "pres_date"=>null
 ];
 

@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <?php
+
+session_start();
+
+if (!isset($_SESSION['Prof_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Prof_id'];
+
+?>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -235,7 +246,6 @@
 </style>
 </head>
 <?php
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $jsonString = file_get_contents("export.json");
 $data = json_decode($jsonString, true);
 $professors = $data['professors'];
@@ -295,7 +305,8 @@ foreach ($professors as $professor) {
     Επικοινωνία με Helpdesk για πρόβλημα σύνδεσης
   <a class="footer-link" href="https://eclass.upatras.gr/" target="_blank">eClass Upatras</a>
   <a class="footer-link" href="https://www.upatras.gr/" target="_blank">Πανεπιστήμιο Πατρών</a>
-  <button class="footer-button logout-button" onclick="window.location.href='loginScr.php'">Αποσύνδεση</button>
+<form method="POST" action="logout.php">
+  <button type="submit" class="footer-button logout-button">Αποσύνδεση</button></form>
   </a>
   </div>
 

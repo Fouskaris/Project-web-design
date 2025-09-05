@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <?php
+
+session_start();
+
+if (!isset($_SESSION['Stud_id'])) {
+    header('Location: login.php');
+    exit;
+}
+$id = $_SESSION['Stud_id'];
+
+?>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -198,7 +209,6 @@
       </svg>
     </button>
   <?php 
-  $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
   $jsonString= file_get_contents("export.json");
   $data= json_decode($jsonString,true);
   $students = $data['students']; 

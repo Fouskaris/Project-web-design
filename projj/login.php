@@ -1,59 +1,71 @@
-<!DOCTYPE html>
-<html>
 <?php
-        $input_usr = $_POST['Usr'];
-        $input_pwd = $_POST['Pass'];
-        $jsonString= file_get_contents("export.json");
-        $data= json_decode($jsonString,true);
-        $students = $data['students']; 
-        $foundstud = false;
-        $data2= json_decode($jsonString,true);
-        $professors= $data2['professors'];
-        $foundprof=false;
-        $count = 0;
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-        if (isset($_POST['stud'])) $count++;
-        if (isset($_POST['prof'])) $count++;
-        if (isset($_POST['secr'])) $count++;
+$input_usr = $_POST['Usr'] ?? null;
+$input_pwd = $_POST['Pass'] ?? null;
 
-        if ($count >= 2) {
-            require 'WrongPassScr.php';           
-            }elseif($count==1){
-                    if (isset($_POST['stud'])){
-                        foreach($students as $student){
-                            if(($student['id']===$input_usr)){
-                            $foundstud=true;
-                            if ($input_pwd===$student['id']){
-                                $id= $student['id'];
-                                header('Location:StudentHomeScreen.php?id='.$id);
-                            }
-                            else {
-                                require 'WrongPassScr.php';
-                            }
-                        }
-                    }
-                    }elseif (isset($_POST['prof'])){
-                        foreach($professors as $professor){
-                           if(($professor['id']===$input_usr)){
-                                $foundprof=true;
-                                if ($input_pwd===$professor['id']){
-                                    $id= $professor['id'];
-                                    header('Location:ProfessorHomeScreen.php?id='.$id);
-                                }
-                                else {
-                                    require 'WrongPassScr.php';
-                                }
-                            }
-                        }
-                    }elseif (isset($_POST['secr'])){
-                        
-                                if ($input_pwd===$input_usr){
-                                    header('Location:SecretariatHomeScreen.php?');
-                                }
-                                else {
-                                    require 'WrongPassScr.php';
-                                }
-                    }}
-        
+$jsonString = file_get_contents("export.json");
+$data = json_decode($jsonString, true);
+
+$students = $data['students'] ?? [];
+$professors = $data['professors'] ?? [];
+
+$count = 0;
+if (isset($_POST['stud'])) $count++;
+if (isset($_POST['prof'])) $count++;
+if (isset($_POST['secr'])) $count++;
+
+if ($count >= 2) {
+    require 'WrongPassScr.php';
+    exit;
+}
+
+if ($count === 1) {
+    if (isset($_POST['stud'])) {
+        foreach ($students as $student) {
+            if ($student['id'] === $input_usr) {
+                if ($input_pwd === $student['id']) {
+                    $_SESSION['Stud_id'] = $student['id'];
+                    header('Location: StudentHomeScreen.php');
+                    exit;
+                } else {
+                    require 'WrongPassScr.php';
+                    exit;
+                }
+            }
+        }
+    }
+
+    if (isset($_POST['prof'])) {
+        foreach ($professors as $professor) {
+            if ($professor['id'] === $input_usr) {
+                if ($input_pwd === $professor['id']) {
+                    $_SESSION['Prof_id'] = $professor['id'];
+                    header('Location: ProfessorHomeScreen.php');
+                    exit;
+                } else {
+                    require 'WrongPassScr.php';
+                    exit;
+                }
+            }
+        }
+    }
+
+    if (isset($_POST['secr'])) {
+        if ($input_pwd === $input_usr) {
+            $_SESSION['Sec_id'] = $input_usr;
+            header('Location: SecretariatHomeScreen.php');
+            exit;
+        } else {
+            require 'WrongPassScr.php';
+            exit;
+        }
+    }
+
+    // If no user matched
+    require 'WrongPassScr.php';
+    exit;
+}
 ?>
-</html>

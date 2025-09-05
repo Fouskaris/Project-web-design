@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+
+if (!isset($_SESSION['Prof_id'])) {
+    header('Location: loginScr.php');
+    exit;
+}
+$id = $_SESSION['Prof_id'];
+
+?>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -152,8 +163,21 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.statTitle{
+.button2 {
+  margin-top: 1%;
+  bottom: 15px;
+  right: 15px;
+  padding: 8px 14px;
+  background-color: rgba(36, 49, 190, 0.81);
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+.button2:hover {
+  background-color: rgba(27, 22, 127, 0.81);
 }
 
 </style>
@@ -195,13 +219,15 @@ foreach ($subjects as $subject) {
     echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subject['student_number']) . '<br>';
     echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subject['status']) . '<br>';
     echo '<strong>Τριμελής Επιτροπή:</strong>' ;
-    foreach($subject['committee'] as $prof_id){
-      foreach($professors as $professor) {
-        if($professor['id'] == $prof_id) {
-          echo $professor['surname'].' '.$professor['name'].'<br>Τομέας:'. $professor['department'],'<br><hr style=" margin-left:0;border: 1px solid black; width: 10%;">'; 
-        }
+    if($subject['committee']!=null){
+      foreach($subject['committee'] as $prof_id){
+        foreach($professors as $professor) {
+          if($professor['id'] == $prof_id) {
+            echo $professor['surname'].' '.$professor['name'].'<br>Τομέας:'. $professor['department'],'<br><hr style=" margin-left:0;border: 1px solid black; width: 10%;">'; 
+          }
+      }
+      }    
     }
-    }    
     echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subject['assignment_date']) . '<br>';
     $exDate=$subject['pres_date'];
     if($exDate){
@@ -306,6 +332,8 @@ foreach ($subjects as $subject) {
   if($days_asMemb_counter> 0) {$avg_asMemb_days=($days_asMemb_counter/$member_counter);echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asMemb_days.' μέρες<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
   if($grade_asMemb_counter>0) {$avg_asMemb_grade=($grade_asMemb_counter/$member_counter);echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asMemb_grade, 2).'<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
   echo '<strong>Συνολικό πλήθος διπλωματικών:</strong>'.$member_counter.' Διπλωματικές';
+  echo '<form action="stats.php" method="post">
+    <button class="button2" type="submit">Αναλυτική Προβολή Στατιστικών</button>';
 ?>
 </div></div>
 
