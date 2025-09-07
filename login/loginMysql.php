@@ -8,6 +8,10 @@
 <?php
 require 'connection.php'; // περιέχει σύνδεση $conn
 
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Έλεγχος αν στάλθηκαν δεδομένα από τη φόρμα
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_usr = $_POST['Usr'] ?? '';
@@ -31,14 +35,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Καθορισμός στοιχείων ανά ρόλο
     if ($isStudent) {
-        $table = 'Students';
-        $redirect = 'StudentHomeScreen.php';
+       $_SESSION['Stud_id'] = $input_usr;
+        // Εκτέλεση ερωτήματος με prepared statement
+        $stmt = $conn->prepare("SELECT id, password FROM Students WHERE username = ?");
+        $stmt->bind_param("s", $input_usr);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $db_pwd);
+            $stmt->fetch();
+
+            if ($input_pwd === $db_pwd) { 
+                header("Location: StudentHomeScreen.php?id=$id");
+                exit;
+            } else {
+                require 'WrongPassScr.php'; // Λάθος password
+                exit;
+            }
+        } else {
+            require 'WrongPassScr.php'; // Δεν υπάρχει αυτός ο χρήστης
+            exit;
+        }
+         
     } elseif ($isProfessor) {
-        $table = 'Professors';
-        $redirect = 'ProfessorHomeScreen.php';
+        $_SESSION['Prof_id'] = $input_usr;
+        // Εκτέλεση ερωτήματος με prepared statement
+        $stmt = $conn->prepare("SELECT id, password FROM Professors WHERE username = ?");
+        $stmt->bind_param("s", $input_usr);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $db_pwd);
+            $stmt->fetch();
+
+            if ($input_pwd === $db_pwd) { 
+                header("Location: ProfessorHomeScreen.php?id=$id");
+                exit;
+            } else {
+                require 'WrongPassScr.php'; // Λάθος password
+                exit;
+            }
+        } else {
+            require 'WrongPassScr.php'; // Δεν υπάρχει αυτός ο χρήστης
+            exit;
+        }
     } elseif ($isSecretariat) {
-        $table = 'Secretariat';
-        $redirect = 'SecretariatHomeScreen.php';
+        $_SESSION['Sec_id'] = $input_usr;
+        // Εκτέλεση ερωτήματος με prepared statement
+        $stmt = $conn->prepare("SELECT id, password FROM Secretariat WHERE username = ?");
+        $stmt->bind_param("s", $input_usr);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $db_pwd);
+            $stmt->fetch();
+
+            if ($input_pwd === $db_pwd) { 
+                header("Location: SecretariatHomeScreen.php?id=$id");
+                exit;
+            } else {
+                require 'WrongPassScr.php'; // Λάθος password
+                exit;
+            }
+        } else {
+            require 'WrongPassScr.php'; // Δεν υπάρχει αυτός ο χρήστης
+            exit;
+        }
     }
 
     // Εκτέλεση ερωτήματος με prepared statement
@@ -51,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($id, $db_pwd);
         $stmt->fetch();
 
-        if ($input_pwd === $db_pwd) { // Μπορείς να αλλάξεις αυτό με password_verify αν είναι hashed
+        if ($input_pwd === $db_pwd) { 
             header("Location: $redirect?id=$id");
             exit;
         } else {
