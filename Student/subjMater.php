@@ -1,129 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <?php
-
 session_start();
-
 if (!isset($_SESSION['Stud_id'])) {
     header('Location: loginScr.php');
     exit;
 }
 $id = $_SESSION['Stud_id'];
-
 ?>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
 
+  .top-menu {
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    z-index: 1000;
+  }
+
+  .top-menu img {
+    width: 8em;
+    height: auto;
+  }
+
+  .menu-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 1em;
+    flex: 1;
+    text-align: left;
+  }
+
+  .button, .buttonNotif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .button {
+    padding: 6px 12px;
+    gap: 8px;
+    height: 40px;
+    border: none;
+  }
+
+  .buttonNotif {
+    padding: 6px 12px;
+    border: 1px solid rgba(78, 79, 81, 0.81);
+    height: 40px;
+    width: 50px;
+  }
+
+  .button:hover, .buttonNotif:hover, .submBu:hover, .AddFileSpace:hover {
+    background: rgba(88, 89, 92, 0.2);
+  }
+
+  .lable {
+    font-size: 1em;
+    color: black;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 6em;
+    margin-bottom: 1em;
+  }
+
+  .h1file {
+    margin-top: 2em;
+  }
+
+  .filebuts {
+    margin-top: 2em;
+    text-align: center;
+  }
+
+  .submBu {
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    border: 1px solid rgba(78, 79, 81, 0.81);
+    height: 40px;
+    width: 100px;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .AddFileSpace {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
     .top-menu {
-      background-color: whitesmoke;
-      color: black;
-      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 10px 20px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      box-sizing: border-box;
     }
 
     .menu-title {
-      font-size: 30px;
-    }
-
-    .button {
-      margin-left: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 16px;
-      gap: 8px;
-      height: 40px;
-      width: 250px;
-      border: none;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .buttonNotif {
-      position: absolute;
-      right: 1px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 12px;
-      gap: 8px;
-      border: 1px solid rgba(78, 79, 81, 0.81);
-      height: 40px;
-      width: 60px;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .buttonNotif:hover,
-    .button:hover,
-    .submBu:hover {
-      background: rgba(88, 89, 92, 0.29);
-    }
-
-    .lable {
-      font-size: 20px;
-      color: black;
-    }
-
-    .h1file {
+      font-size: 1.2em;
+      margin: 0.5em 0;
       text-align: center;
+      width: 100%;
+    }
+
+    .top-menu img {
+      width: 6em;
       margin: auto;
-      margin-top: 2em;
-      margin-bottom: 1em;
     }
 
-    .AddFileSpace {
-      border: none;
-      background-color: white;
-      cursor: pointer;
+    .button, .buttonNotif {
+      margin: 5px 0;
     }
 
-    .filebuts {
-      margin-top: 2em;
-      text-align: center;
+    h1 {
+      font-size: 1.5em;
+      margin-top: 8em;
     }
 
     .submBu {
-      justify-content: center;
-      align-items: center;
-      padding: 8px 12px;
-      gap: 8px;
-      border: 1px solid rgba(78, 79, 81, 0.81);
-      height: 40px;
-      width: 100px;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-      text-align: center;
+      width: 80px;
+      height: 35px;
+      font-size: 0.9em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .menu-title {
+      font-size: 1em;
     }
 
-    .tabletitle {
-      margin: auto;
-      margin-top: 5em;
-      text-align: center;
+    .lable {
+      font-size: 0.9em;
     }
-  </style>
+
+    h1 {
+      font-size: 1.2em;
+      margin-top: 10em;
+    }
+
+    .submBu {
+      width: 70px;
+      height: 30px;
+      font-size: 0.8em;
+    }
+  }
+</style>
 </head>
 <body>
+
 <div class="top-menu">
-  <img src="upatrasLogo.jpg" alt="Image" style="display: block; margin: 0px; width: 10em;">
+  <img src="upatrasLogo.jpg" alt="Image">
   <div class="menu-title">Σύστημα Υποστήριξης Διπλωματικών Εργασιών</div>
   <button class="buttonNotif">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
       <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
     </svg>
   </button>
@@ -166,12 +218,11 @@ foreach ($subjects as $subject) {
 }
 
 if ($subj_id == 0) {
-  echo "<h1 style='color:red ;text-align: center; margin: auto; margin-top: 6em; font-size:2em;'>Πρέπει να υπάρχει ενεργή διπλωματική εργασία για να ανεβάσεις αρχεία</h1>";
+  echo "<h1 style='color:red;'>Πρέπει να υπάρχει ενεργή διπλωματική εργασία για να ανεβάσεις αρχεία</h1>";
 } else {
-  echo "<h1 style='text-align: center; margin: auto; margin-top:5em;'>$subj_name</h1>";
+  echo "<h1>$subj_name</h1>";
   echo "<h1 class='h1file'>Ανέβασμένα Αρχεία:</h1>";
   echo "<div style='margin:auto; text-align:center;'>";
-
   $fileCount = 0;
   foreach ($subjects as $subject) {
     if ($subject['id'] === $subj_id && isset($subject['file']) && is_array($subject['file'])) {
@@ -182,45 +233,38 @@ if ($subj_id == 0) {
       break;
     }
   }
-
-  if ($fileCount === 0) {
-    echo '<h2>Δεν βρέθηκαν αρχεία</h2>';
-  }
+  if ($fileCount === 0) echo '<h2>Δεν βρέθηκαν αρχεία</h2>';
   echo "</div>";
 }
 ?>
 
 <?php if ($subj_id != 0): ?>
-  <h1 class="h1file">Ανέβασε Αρχεία:</h1>
-  <form action="upload.php" method="post" enctype="multipart/form-data" style="text-align:center; font-size:20px;">
-    <div id="fileInputs">
-      <label for="myfile1">1.</label>
-      <input type="file" id="myfile1" name="myfile[]"><br><br>  
-    </div>
-    <div class="filebuts">
-      <button class="AddFileSpace" type="button" onclick="addFileInput()">
-        <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
-          <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/>
-          <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'/>
-        </svg>
-      </button>
-      <input type="hidden" name="id" value="<?php echo $subj_id; ?>">
-      <button class="submBu" type="submit">Υποβολή</button>
-    </div>
-  </form>
+<h1 class="h1file">Ανέβασε Αρχεία:</h1>
+<form action="upload.php" method="post" enctype="multipart/form-data" style="text-align:center; font-size:1em;">
+  <div id="fileInputs">
+    <label for="myfile1">1.</label>
+    <input type="file" id="myfile1" name="myfile[]"><br><br>  
+  </div>
+  <div class="filebuts">
+    <button class="AddFileSpace" type="button" onclick="addFileInput()">
+      <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
+        <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/>
+        <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'/>
+      </svg>
+    </button>
+    <input type="hidden" name="id" value="<?php echo $subj_id; ?>">
+    <button class="submBu" type="submit">Υποβολή</button>
+  </div>
+</form>
 <?php endif; ?>
 
 <script>
 let fileCounter = 2;
-
 function addFileInput() {
   const container = document.getElementById("fileInputs");
-
   const newDiv = document.createElement("div");
-  newDiv.innerHTML = `
-    <label for="myfile${fileCounter}">${fileCounter}.</label>
-    <input type="file" id="myfile${fileCounter}" name="myfile[]"><br><br>
-  `;
+  newDiv.innerHTML = `<label for="myfile${fileCounter}">${fileCounter}.</label>
+    <input type="file" id="myfile${fileCounter}" name="myfile[]"><br><br>`;
   container.appendChild(newDiv);
   fileCounter++;
 }

@@ -95,80 +95,89 @@ $id = $_SESSION['Stud_id'];
       cursor: pointer;
     }
     .container {
-  margin-top: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  background-color: white;
-  box-sizing: border-box;
-  min-height: 80vh;
-  z-index: 0;
-}
+      margin-top: 1em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+      background-color: white;
+      box-sizing: border-box;
+      min-height: 80vh;
+      z-index: 0;
+    }
 
-.card {
-  position: relative;
-  width: 600px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 0;
-  margin:auto;
-}
+    .card {
+      position: relative;
+      width: 600px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 0;
+      margin:auto;
+    }
 
-.button {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  padding: 8px 14px;
-  background-color: rgba(36, 190, 49, 0.81);
-  color: black;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
+    .button {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      padding: 8px 14px;
+      background-color: rgba(36, 190, 49, 0.81);
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-.button:hover {
-  background-color: rgba(22, 127, 31, 0.81);
-}
-.Pageheader{
-  margin-top:3em;
-  font-size:2em;
-  margin-left: 7em;
-}
+    .button:hover {
+      background-color: rgba(22, 127, 31, 0.81);
+    }
 
-.inp{
-  border:none;
-  font-size: 1em;  
-  width: 300px;
-}
-.delNotif{
-  padding: 8px 14px;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  border:black;
-  background-color: white;
-  width: 5%;
-  margin:auto;
-  font-size: 1.5em;
-  margin-left: auto;
-  display: block;
-}
-.delNotif:hover{
-  color:red;
+    .Pageheader{
+      margin-top:3em;
+      font-size:2em;
+      margin-left: 7em;
+    }
 
-}
-</style>
-    </head>
+    .inp{
+      border:none;
+      font-size: 1em;  
+      width: 300px;
+    }
+
+    .delNotif{
+      padding: 8px 14px;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      border:black;
+      background-color: white;
+      width: 5%;
+      margin:auto;
+      font-size: 1.5em;
+      margin-left: auto;
+      display: block;
+    }
+
+    .delNotif:hover{
+      color:red;
+    }
+
+    .back-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+  </style>
+</head>
 <body>
 
 <div class="top-menu">
@@ -180,8 +189,11 @@ $id = $_SESSION['Stud_id'];
     </svg>
   </button>
 </div>
+
 <h1 class="Pageheader">Προφίλ</h1>
+
 <?php
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $studentData = json_decode(file_get_contents("export.json"), true);
 $students = &$studentData['students'];
 $stud_num = "";
@@ -216,7 +228,9 @@ if ($studentFound) {
     echo "<div class='container'><p>Δεν βρέθηκε θέμα με ID: <strong>$id</strong>.</p></div>";
   }
 ?> 
+
 <h1 class="Pageheader" id="bottom">Ειδοποιήσεις</h1>
+
 <?php
 if (empty($student['notifications'])) {
     echo "Δεν υπάρχουν Ειδοποιήσεις";
@@ -250,12 +264,8 @@ if (empty($student['notifications'])) {
 file_put_contents("export.json", json_encode($studentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 ?>
 
-<button type="button" class="button" onclick="history.back()">Επιστροφή</button>
+<button type="button" class="button back-btn" onclick="history.back()">Επιστροφή</button>
 
 </body>
 </html>
-
-
-
-
 
