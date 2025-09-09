@@ -54,6 +54,7 @@ body {
   border-radius: 20px;
   cursor: pointer;
   margin-left: 20px;
+  margin-right: 22px;
 }
 .buttonNotif:hover { background: rgba(88, 89, 92, 0.2); }
 .submBu {
@@ -192,7 +193,7 @@ body {
   </button>
 </div>
 
-<h1 class="depclasstext">Κείμενο</h1>
+<h1 class="depclasstext">Επιλογή τριμελούς επιτροπής και ημερομηνίας εξέτασης</h1>
 
 <div class="depclass">
 <form method="get">
