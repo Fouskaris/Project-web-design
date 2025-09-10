@@ -1,41 +1,57 @@
 <?php
 $subj_id = isset($_POST['id']) ? $_POST['id'] : '';
-$grade = isset($_POST['grade']) ? (int)$_POST['grade'] : null;
+$grade = isset($_POST['student_grade']) ? (int)$_POST['student_grade'] : null;
+
+if ($grade === null || $grade < 1 || $grade > 10) {
+    echo '<script>alert("Μη έγκυρος βαθμός! Επιτρέπεται μόνο 1-10."); history.back();</script>';
+    exit;
+}
 
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
 $subjects = &$data['subjects'];
+$stud_num = null;
+$prof_id = null;
+$subj_name = '';
+
 foreach ($subjects as &$subject) {
     if ($subject['id'] == $subj_id) {
         $subject['grade'] = $grade;
-        $prof_id=$subject['professor_id'] ;
-        $stud_num=$subject['student_number'];
-        date_default_timezone_set('Europe/Athens');
-        $today = date("d-m-Y H:i:s");
+        $subject['status'] = "Περατωμένη";
+        $prof_id = $subject['professor_id'];
+        $stud_num = $subject['student_number'];
         $subj_name = $subject['name'];
-        $newNotification = [
-        "id"=> 0,
+        break;
+    }
+}
+
+if ($stud_num !== null) {
+    date_default_timezone_set('Europe/Athens');
+    $today = date("d-m-Y H:i:s");
+    $newNotification = [
+        "id" => time() . rand(100, 999),
         "message" => "O τελικός βαθμός για την εξέταση του θέματος $subj_name είναι $grade",
         "date" => $today,
-        "by" => $prof_id,             
+        "by" => $prof_id,
         "to" => $stud_num,
         "seen" => "no",
-        "type"=>"text" 
+        "type" => "text"
     ];
-        break;
-    }
-}
-$jsonString2 = file_get_contents("export.json");
-$data2 = json_decode($jsonString2, true);
-$students = &$data2['students'];
-foreach ($students as &$stud) {
-    if ($stud['student_number']==$stud_num) {
-        $newNotification['id'] = time() . rand(100, 999);
-        $stud['notifications'][] = $newNotification;
-        break;
-    }
-}
-file_put_contents("dipl.json", json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-file_put_contents("export.json", json_encode($data2, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
+    $jsonString2 = file_get_contents("export.json");
+    $data2 = json_decode($jsonString2, true);
+    $students = &$data2['students'];
+
+    foreach ($students as &$stud) {
+        if ($stud['student_number'] == $stud_num) {
+            $stud['notifications'][] = $newNotification;
+            break;
+        }
+    }
+    file_put_contents("export.json", json_encode($data2, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
+file_put_contents("dipl.json", json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+echo '<script>alert("Ο βαθμός καταχωρήθηκε με επιτυχία!"); history.back();</script>';
+exit;
 ?>
