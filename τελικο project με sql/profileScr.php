@@ -197,12 +197,17 @@ $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $studentData = json_decode(file_get_contents("export.json"), true);
 $students = &$studentData['students'];
 $stud_num = "";
+
+// Αρχικοποίηση για να αποφύγουμε το Undefined variable
+$studentFound = null;
+
 foreach ($students as &$student) {
     if ($student['id'] == $id) {
-      $studentFound=&$student;
+      $studentFound = &$student;
       break;
     }
 }
+
 if ($studentFound) {
       echo '<div class="card">';
       echo '<form action="update_prof.php" method="post">';
@@ -232,7 +237,7 @@ if ($studentFound) {
 <h1 class="Pageheader" id="bottom">Ειδοποιήσεις</h1>
 
 <?php
-if (empty($student['notifications'])) {
+if (empty($studentFound['notifications'])) {
     echo "Δεν υπάρχουν Ειδοποιήσεις";
 } else {
   echo '<div class="card">';
