@@ -14,7 +14,8 @@
             "file": [
                 "topic.pdf",
                 "important_files.pdf",
-                "Θέματα Φεβρουάριος 2025.pdf"
+                "Θέματα Φεβρουάριος 2025.pdf",
+                "Entity-Relationships Diagram.jpg"
             ],
             "committee": [
                 1,
@@ -285,20 +286,6 @@
                 32
             ],
             "pres_date": "30-07-2023",
-            "grade": 8
-        },
-        {
-            "id": "68c192b43fe7d",
-            "name": "a",
-            "description": "a",
-            "professor_surname": "Komninos",
-            "professor_id": 1,
-            "student_number": "10433999",
-            "status": "Περατωμένη",
-            "assignment_date": "10-09-2025",
-            "file": [],
-            "committee": [],
-            "pres_date": null,
             "grade": 8
         }
     ]
