@@ -41,7 +41,7 @@ if (isset($_POST['selectedProfs'])) {
     }
     }}
     file_put_contents('export.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-    echo "<h1 style='margin-left:auto;margin-top:5em;'>Επιτυχής Αποστολή Αιτημάτων: " . htmlspecialchars($newNotification['message']) . "</h1>";  
+    echo "<h1 style='margin-left:auto;margin-top:5em;'>Επιτυχής Αποστολή Αιτημάτων" ."</h1>";  
 } else {
     echo "Δεν επιλέχθηκαν καθηγητές";
 }
