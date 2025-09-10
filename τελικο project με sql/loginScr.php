@@ -153,6 +153,22 @@
       font-size: 0.9em;
     }
 
+    .announcements {
+  text-align: center;
+}
+
+    .announcements a {
+  display: block;
+  margin: 0.5em 0;
+  color: #0645ad;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+    .announcements a:hover {
+  text-decoration: underline;
+}
+
     @media (max-width: 768px) {
       #heading {
         font-size: 1.5em;
@@ -183,6 +199,10 @@
       }
 
       .form {
+        width: 95%;
+      }
+
+      .announcements {
         width: 95%;
       }
     }
@@ -262,6 +282,12 @@
       <button class="button1" type="submit">Σύνδεση</button>
     </div>
   </form>
+
+  <div class="announcements">
+    <a href="announcements.php">Δείτε όλες τις ανακοινώσεις</a> 
+    <a href="announcements.php?format=json">JSON</a>
+    <a href="announcements.php?format=xml">XML</a>
+  </div>
 
   <a href="https://helpdesk.upnet.gr/" style="display:block; margin:1em auto; color:#0645ad;">Επικοινωνία με Helpdesk για πρόβλημα σύνδεσης</a>
 </body>
