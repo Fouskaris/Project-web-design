@@ -187,9 +187,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
   <?php endif; ?>
 </div>
 
-<form action="view_theses.php" method="get">
+<form action="Manage_theses.php" method="get">
   <button class="back-button" type="submit">Επιστροφή</button>
 </form>
 
 </body>
+
 </html>
