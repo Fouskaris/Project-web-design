@@ -138,6 +138,31 @@ if ($id !== null && isset($data['subjects']) && is_array($data['subjects'])) {
     echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subjectFound['student_number']) . '<br>';
     echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subjectFound['status']) . '<br>';
 
+    // Υπολογισμός ημερών από ανάθεση
+    if (!empty($subjectFound['assignment_date'])) {
+        $dateStr = $subjectFound['assignment_date'];
+
+        // Προσπαθούμε πρώτα με format YYYY-MM-DD
+        $dateObj = DateTime::createFromFormat("Y-m-d", $dateStr);
+
+        // Αν δεν πετύχει, δοκιμάζουμε format DD-MM-YYYY
+        if (!$dateObj) {
+            $dateObj = DateTime::createFromFormat("d-m-Y", $dateStr);
+        }
+
+        if ($dateObj) {
+            $today = new DateTime();
+            $diff = $dateObj->diff($today)->days;
+            echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . $dateObj->format("d-m-Y") . '<br>';
+            echo '<strong>Μέρες από ανάθεση:</strong> ' . $diff . '<br>';
+        } else {
+            echo '<strong>Μέρες από ανάθεση:</strong> Μη έγκυρη ημερομηνία<br>';
+        }
+    } else {
+        echo '<strong>Μέρες από ανάθεση:</strong> Δεν έχει οριστεί<br>';
+    }
+
+    // Τριμελής Επιτροπή
     $jsonProfessors = json_decode(file_get_contents("export.json"), true);
     $professorsList = $jsonProfessors["professors"];
     echo '<strong>Τριμελής Επιτροπή:</strong> ';
