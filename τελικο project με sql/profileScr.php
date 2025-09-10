@@ -49,149 +49,169 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_number'], $_P
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
   <style>
-    .menu-title {
-      font-size: 30px;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
 
-    .button {
-      margin-left: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 16px;
-      gap: 8px;
-      height: 40px;
-      width: 250px;
-      border: none;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
+  .top-menu {
+    background-color: whitesmoke;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+  }
 
-    .buttonNotif {
-      position: absolute;
-      right: 1px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 12px;
-      gap: 8px;
-      border: 1px solid rgba(78, 79, 81, 0.81);
-      height: 40px;
-      width: 60px;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
+  .menu-title {
+    font-size: 30px;
+  }
 
-    .buttonNotif:hover,
-    .button:hover,
-    .submBu:hover {
-      background: rgba(88, 89, 92, 0.29);
-    }
+  .button {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 8px;
+    height: 40px;
+    width: 250px;
+    border: none;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
 
-    .lable {
-      font-size: 20px;
-      color: black;
-    }
-    .retbut{
-      position: absolute;
-      margin-top: 2em;
-      margin-left: 2em;
-      font-size: 1.5em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 12px;
-      gap: 8px;
-      border: 1px solid rgba(78, 79, 81, 0.81);
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    .container {
-      margin-top: 1em;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 10px;
-      background-color: white;
-      box-sizing: border-box;
-      min-height: 80vh;
-      z-index: 0;
-    }
+  .buttonNotif {
+    position: absolute;
+    right: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    border: 1px solid rgba(78, 79, 81, 0.81);
+    height: 40px;
+    width: 60px;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
 
-    .card {
-      position: relative;
-      width: 600px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 0;
-      margin:auto;
-    }
+  .buttonNotif:hover,
+  .button:hover,
+  .submBu:hover {
+    background: rgba(88, 89, 92, 0.29);
+  }
 
-    .button {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      padding: 8px 14px;
-      background-color: rgba(36, 190, 49, 0.81);
-      color: black;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+  .lable {
+    font-size: 20px;
+    color: black;
+  }
 
-    .button:hover {
-      background-color: rgba(22, 127, 31, 0.81);
-    }
+  .retbut {
+    position: absolute;
+    margin-top: 2em;
+    margin-left: 2em;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    border: 1px solid rgba(78, 79, 81, 0.81);
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
 
-    .Pageheader{
-      margin-top:3em;
-      font-size:2em;
-      margin-left: 7em;
-    }
+  .container {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    background-color: white;
+    box-sizing: border-box;
+    min-height: 80vh;
+    z-index: 0;
+  }
 
-    .inp{
-      border:none;
-      font-size: 1em;  
-      width: 300px;
-    }
+  .card {
+    position: relative;
+    width: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 0;
+    margin: auto;
+  }
 
-    .delNotif{
-      padding: 8px 14px;
-      color: black;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      border:black;
-      background-color: white;
-      width: 5%;
-      margin:auto;
-      font-size: 1.5em;
-      margin-left: auto;
-      display: block;
-    }
+  .button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    padding: 8px 14px;
+    background-color: rgba(36, 190, 49, 0.81);
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
-    .delNotif:hover{
-      color:red;
-    }
+  .button:hover {
+    background-color: rgba(22, 127, 31, 0.81);
+  }
 
-    .back-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 2;
-    }
-    </style>
+  .Pageheader {
+    margin-top: 3em;
+    font-size: 2em;
+    margin-left: 7em;
+  }
+
+  .inp {
+    border: none;
+    font-size: 1em;
+    width: 300px;
+  }
+
+  .delNotif {
+    padding: 8px 14px;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    border: black;
+    background-color: white;
+    width: 5%;
+    margin: auto;
+    font-size: 1.5em;
+    margin-left: auto;
+    display: block;
+  }
+
+  .delNotif:hover {
+    color: red;
+  }
+
+  .back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+  }
+</style>
 </head>
 <body>
 
