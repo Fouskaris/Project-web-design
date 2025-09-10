@@ -1,0 +1,63 @@
+######################################################
+# Ενεργοποίηση caching για εικόνες, CSS, JS και HTML
+######################################################
+
+# Ενεργοποίηση mod_expires
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Εικόνες: κρατάμε στον browser για 1 χρόνο
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/jpg  "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/gif  "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # CSS & JS: 1 μήνας
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # HTML: πιο μικρό TTL (1 ώρα)
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Ενεργοποίηση mod_headers για Cache-Control
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+
+  <FilesMatch "\.(html|htm|php)$">
+    Header set Cache-Control "max-age=3600, private, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+######################################################
+# Ασφάλεια: Αποφυγή πρόσβασης σε αρχεία .ht* και .env
+######################################################
+<FilesMatch "^\.ht">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
+
+######################################################
+# URL rewriting (αν θέλεις clean URLs για PHP frameworks)
+######################################################
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Παράδειγμα: ανακατεύθυνση index.php για clean URLs
+    # Αν δεν υπάρχει το αρχείο ή ο φάκελος, δρομολογεί όλα σε index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
