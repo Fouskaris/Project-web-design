@@ -110,7 +110,7 @@ body {
   top: 100%;
   left: 0;
   width: 100%;
-  z-index: 3000; /* υψηλό z-index ώστε να καλύπτει όλα τα υπόλοιπα */
+  z-index: 3000; 
   max-height: 400px;
   overflow-y: auto;
   background: white;
@@ -266,8 +266,35 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </select>
   </div>
 </div>
-<button class="submBu" id="finalSub" type="submit" onclick="alert('Η υποβολή έγινε με επιτυχία!')">Υποβολή Ημερομηνίας</button>
+<hr style="border: 1px solid black; width: 50%;">
+
+<div class="wrapper">
+  <div class="droppage">-Ορισμός Αίθουσας&nbsp;&nbsp;&nbsp;
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flask" viewBox="0 0 16 16">
+  <path d="M4.5 0a.5.5 0 0 0 0 1H5v5.36L.503 13.717A1.5 1.5 0 0 0 1.783 16h12.434a1.5 1.5 0 0 0 1.28-2.282L11 6.359V1h.5a.5.5 0 0 0 0-1zM10 2H9a.5.5 0 0 0 0 1h1v1H9a.5.5 0 0 0 0 1h1v1H9a.5.5 0 0 0 0 1h1.22l.61 1H10a.5.5 0 1 0 0 1h1.442l.611 1H11a.5.5 0 1 0 0 1h1.664l.611 1H12a.5.5 0 1 0 0 1h1.886l.758 1.24a.5.5 0 0 1-.427.76H1.783a.5.5 0 0 1-.427-.76l4.57-7.48A.5.5 0 0 0 6 6.5V1h4z"/>
+  </svg>  
+  </div>
+  <div class="onHover">
+    <label for="exDate">Αίθουσα Εξέτασης:</label>
+    <input type="hidden" name="stud_id" value="<?php echo htmlspecialchars($id); ?>">
+    <select class="exDate" id="pres_class" name="time">
+      <option value="δια ζώσης">Δια ζώσης</option>
+      <option value="διαδικτυακά">Διαδικτυακά</option>
+    </select>
+    <div class="class">
+
+  <div class="field">
+    <input type="hidden" name="stud_id" value="<?php echo htmlspecialchars($id); ?>">
+    <input name="class" placeholder="Link ή Αίθουσα" class="input-field" type="text">
+    
+
+  </div><hr style="border: 1px solid black; width: 90%;">
+</div>
+  </div>
+</div>
+<button class="submBu" id="finalSub" type="submit" onclick="alert('Η υποβολή έγινε με επιτυχία!')">Υποβολή Ημερομηνίας και Αίθουσας</button>
 </form>
+<hr style="border: 1px solid black; width: 90%;">
 
 </body>
 </html>
