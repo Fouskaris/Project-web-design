@@ -1,12 +1,13 @@
-
 <?php
   $stud_id = $_POST['stud_id'] ?? '';
     $exDate = $_POST['exDate'] ?? '';
     $time = $_POST['time'] ?? '';
+    $pres_class = $_POST['class'] ?? '';
 
     $stud_id = htmlspecialchars(trim($stud_id));
     $exDate = htmlspecialchars(trim($exDate));
     $time = htmlspecialchars(trim($time));
+    
 
     echo "Student ID: " . $stud_id . "<br>";
     echo "Date: " . $exDate . "<br>";
@@ -30,6 +31,7 @@
     if ($subject["student_number"]==$stud_num){
         $subj_name = $subject["name"];
         $subject['pres_date']= $exDate;
+        $subject['pres_class']=$pres_class;
     }}
 date_default_timezone_set('Europe/Athens');
 $today = date("Y-m-d");
@@ -48,7 +50,5 @@ if ($exDate){
 file_put_contents("dipl.json", json_encode($data2, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 echo '<script>history.back();</script>';
 ?>
-
-
 
 
