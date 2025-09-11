@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="el">
+  <?php
+
+session_start();
+
+if (!isset($_SESSION['Stud_id'])) {
+    header('Location: login.php');
+    exit;
+}
+$id = $_SESSION['Stud_id'];
+
+?>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -372,3 +383,4 @@ fetch('announcements.json')
 </script>
 </body>
 </html>
+
