@@ -1,36 +1,53 @@
 <?php
 $id = isset($_POST['id']) ? $_POST['id'] : null;
-$choice = isset($_POST['choice']) ? (int)$_POST['choice'] : null;
+$choice = isset($_POST['choice']) ? trim($_POST['choice']) : null;
+$reason = isset($_POST['reason']) ? trim($_POST['reason']) : '';
+
+if ($id === null || $choice === null) {
+    die("Λείπουν δεδομένα.");
+}
 
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
 $subjects = &$data['subjects'];
-        echo $choice;
-        echo $id;
+
+$status = null;
 switch ($choice) {
-    case 1:
+    case 'Διαθέσιμη':
         $status = 'Διαθέσιμη';
         break;
-    case 2:
+    case 'Ενεργή':
         $status = 'Ενεργή';
         break;
-    case 3:
+    case 'Υπό Εξέταση':
         $status = 'Υπό Εξέταση';
         break;
-    case 4:
-        $status = 'Ακυρωμένη Από καθηγητή';
+    case 'Ακύρωση':
+        $status = 'Ακυρωμένη από Καθηγητή';
         break;
-        default:
-    die("Μη έγκυρη επιλογή.");
-    };
-    foreach ($subjects as &$subject) {
+    default:
+        die("Μη έγκυρη επιλογή.");
+}
+
+$today = date("d-m-Y");
+
+foreach ($subjects as &$subject) {
     if ($subject['id'] == $id) {
         $subject['status'] = $status;
-        echo $status;
-        echo $subject['name'];
+
+        if ($status === 'Υπό Εξέταση') {
+            $subject['exam_request_date'] = $today;
+        }
+        if ($status === 'Ακυρωμένη από Καθηγητή' && $reason !== '') {
+            $subject['cancellation_reason'] = $reason;
+            $subject['cancellation_date'] = $today;
+        }
         break;
     }
 }
 
 file_put_contents("dipl.json", json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+echo '<script>alert("Η κατάσταση ενημερώθηκε με επιτυχία!"); history.back();</script>';
+exit;
 ?>
