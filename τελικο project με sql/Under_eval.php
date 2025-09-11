@@ -15,6 +15,17 @@ foreach ($subjects as $subject) {
 
 <!DOCTYPE html>
 <html lang="el">
+    <?php
+
+session_start();
+
+if (!isset($_SESSION['Sec_id'])) {
+    header('Location: login.php');
+    exit;
+}
+$id = $_SESSION['Sec_id'];
+
+?>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -143,4 +154,5 @@ foreach ($subjects as $subject) {
 </form>
 
 </body>
+
 </html>
