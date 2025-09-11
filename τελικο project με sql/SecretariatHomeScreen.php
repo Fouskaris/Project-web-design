@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="el">
-   <?php
+  <?php
 
 session_start();
 
@@ -123,7 +123,7 @@ $id = $_SESSION['Sec_id'];
   }
 
   .announcement-header {
-    padding: 15px;
+    padding: 5px;
     font-weight: bold;
     font-size: 20px;
     background-color: #f5f5f5;
@@ -136,7 +136,6 @@ $id = $_SESSION['Sec_id'];
     max-height: 400px;
     overflow-y: auto;
     padding: 10px;
-    padding-bottom: 80px;
   }
 
   .announcement-item {
@@ -251,7 +250,7 @@ $id = $_SESSION['Sec_id'];
 
     .announcement-sidebar {
       width: 100%;
-      margin-top: 1em;
+      margin-top: 0em;
       margin-bottom: 4em;
     }
   }
@@ -343,4 +342,3 @@ fetch('announcements.json')
 </script>
 </body>
 </html>
-
