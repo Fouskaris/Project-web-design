@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if (!isset($_SESSION['Prof_id'])) {
@@ -160,6 +159,7 @@ if (isset($_GET['export']) && ($_GET['export'] === 'csv' || $_GET['export'] === 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap:20px;
   padding: 10px;
   background-color: white;
   box-sizing: border-box;
@@ -170,10 +170,10 @@ if (isset($_GET['export']) && ($_GET['export'] === 'csv' || $_GET['export'] === 
 .card {
   margin-top:2em ;
   position: relative;
-  width: 600px;
+  width: 500px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid #ccc;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(36, 190, 49, 0.81);
   display: flex;
