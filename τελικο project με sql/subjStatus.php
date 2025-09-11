@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 
 session_start();
@@ -9,7 +8,61 @@ if (!isset($_SESSION['Prof_id'])) {
 }
 $id = $_SESSION['Prof_id'];
 
+$jsonString2 = file_get_contents("dipl.json");
+$data2 = json_decode($jsonString2, true);
+$subjects = $data2['subjects'];
+
+$jsonString = file_get_contents("export.json");
+$data = json_decode($jsonString, true);
+$professors = $data['professors'];
+
+$filter_status = isset($_GET['status']) ? $_GET['status'] : '';
+$filter_role = isset($_GET['role']) ? $_GET['role'] : '';
+
+if (isset($_GET['export']) && ($_GET['export'] === 'csv' || $_GET['export'] === 'json')) {
+    $exportData = [];
+
+    foreach ($subjects as $subject) {
+        // ρόλος
+        $isSupervisor = ($subject['professor_id'] == $id);
+        $isCommittee = (is_array($subject['committee']) && in_array($id, $subject['committee']));
+
+        if ($filter_role === 'supervisor' && !$isSupervisor) continue;
+        if ($filter_role === 'committee' && !$isCommittee) continue;
+
+        if ($filter_status && $subject['status'] !== $filter_status) continue;
+
+        $exportData[] = $subject;
+    }
+
+    if ($_GET['export'] === 'json') {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit;
+    } elseif ($_GET['export'] === 'csv') {
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="diplomatikes.csv"');
+        $output = fopen('php://output', 'w');
+        fputcsv($output, ['ID','Τίτλος','Κατάσταση','Φοιτητής','Επιβλέπων','Ημερομηνία Ανάθεσης','Ημερομηνία Εξέτασης','Βαθμός']);
+        foreach ($exportData as $row) {
+            fputcsv($output, [
+                $row['id'],
+                $row['name'],
+                $row['status'],
+                $row['student_number'],
+                $row['professor_surname'],
+                $row['assignment_date'],
+                $row['pres_date'],
+                $row['grade']
+            ]);
+        }
+        fclose($output);
+        exit;
+    }
+}
 ?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -165,110 +218,67 @@ $id = $_SESSION['Prof_id'];
   <img src="upatrasLogo.jpg" alt="Image" style="display: block; margin: 0px; width: 10em;">
   <div class="menu-title">Σύστημα Υποστήριξης Διπλωματικών Εργασιών</div>
 </div>
+
 <h1 class="title">Κατάσταση Διπλωματικών</h1>
-<h2 class="title">Ως Επιβλέπων</h2>
-<?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-$jsonString = file_get_contents("export.json");
-$data = json_decode($jsonString, true);
-$professors = $data['professors'];
-foreach ($professors as $professor) {
-  if ($professor['id'] == $id) {
-    $last_name = $professor['surname'];
-  }
-}
-$jsonString2 = file_get_contents("dipl.json");
-$data2 = json_decode($jsonString2, true);
-$subjects = $data2['subjects'];
 
+<form method="get" style="text-align:center; margin-top:2em;">
+    <label>Κατάσταση:
+        <select name="status">
+            <option value="">Όλες</option>
+            <option value="Υπό Ανάθεση" <?= $filter_status==="Υπό Ανάθεση"?"selected":"" ?>>Υπό Ανάθεση</option>
+            <option value="Ενεργή" <?= $filter_status==="Ενεργή"?"selected":"" ?>>Ενεργή</option>
+            <option value="Περατωμένη" <?= $filter_status==="Περατωμένη"?"selected":"" ?>>Περατωμένη</option>
+            <option value="Ακυρωμένη" <?= $filter_status==="Ακυρωμένη"?"selected":"" ?>>Ακυρωμένη</option>
+            <option value="Υπό Εξέταση" <?= $filter_status==="Υπό Εξέταση"?"selected":"" ?>>Υπό Εξέταση</option>
+        </select>
+    </label>
+
+    <label>Ρόλος:
+        <select name="role">
+            <option value="">Όλοι</option>
+            <option value="supervisor" <?= $filter_role==="supervisor"?"selected":"" ?>>Επιβλέπων</option>
+            <option value="committee" <?= $filter_role==="committee"?"selected":"" ?>>Μέλος Τριμελούς</option>
+        </select>
+    </label>
+
+    <button type="submit">Φιλτράρισμα</button>
+    <button type="submit" name="export" value="csv">Εξαγωγή CSV</button>
+    <button type="submit" name="export" value="json">Εξαγωγή JSON</button>
+</form>
+
+<div class="container">
+
+<?php
 foreach ($subjects as $subject) {
-    if ($subject["professor_id"] == $id) {
-        
-    echo '<div class="container">';
+    $isSupervisor = ($subject['professor_id'] == $id);
+    $isCommittee = (is_array($subject['committee']) && in_array($id, $subject['committee']));
+
+    if ($filter_role === 'supervisor' && !$isSupervisor) continue;
+    if ($filter_role === 'committee' && !$isCommittee) continue;
+    if ($filter_status && $subject['status'] !== $filter_status) continue;
+
     echo '<div class="card">';
-    echo '<strong>Τίτλος:</strong> ' . htmlspecialchars($subject['name']) . '<br>';
-    echo '<strong>Περιγραφή:</strong> ' . htmlspecialchars($subject['description']) . '<br>';
-    echo '<strong>Επιβλέπων:</strong> ' . htmlspecialchars($subject['professor_surname']) . '<br>';
-    echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subject['student_number']) . '<br>';
-    echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subject['status']) . '<br>';
-    echo '<strong>Τριμελής Επιτροπή:</strong>' ;
-    if($subject['committee']!=null){
-      foreach($subject['committee'] as $prof_id){
-        foreach($professors as $professor) {
-          if($professor['id'] == $prof_id) {
-            echo $professor['surname'].' '.$professor['name'].'<br>Τομέας:'. $professor['department'],'<br><hr style=" margin-left:0;border: 1px solid black; width: 10%;">'; 
-          }
-      }
-      }    
+    echo '<h3>'.$subject['name'].'</h3>';
+    echo '<p><strong>Περιγραφή:</strong> '.$subject['description'].'</p>';
+    echo '<p><strong>Επιβλέπων:</strong> '.$subject['professor_surname'].'</p>';
+    echo '<p><strong>Κατάσταση:</strong> '.$subject['status'].'</p>';
+    if ($subject['student_number']) {
+        echo '<p><strong>ΑΜ Φοιτητή:</strong> '.$subject['student_number'].'</p>';
     }
-    echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subject['assignment_date']) . '<br>';
-    $exDate=$subject['pres_date'];
-    if($exDate){
-      $today = date("Y-m-d");
-      $todayDate = new DateTime($today);
-      $exDateObj = new DateTime($exDate);
-      if ($exDateObj > $todayDate) {
-          $interval = $todayDate->diff($exDateObj);
-          echo '<strong>Ημέρες για εξέταση:</strong> ' . htmlspecialchars($interval->days) . ' ημέρες<br>';
-      } elseif ($exDateObj < $todayDate) {
-          echo '<strong>Ημέρες για εξέταση:</strong> Περασμένη ημερομηνία<br>';
-          if ($subject['grade']!=null){
-          echo '<strong>Βαθμός:</strong> ' . htmlspecialchars($subject['grade']) . '<br>';
-          }
-      } else {
-          
-          echo '<strong>Ημέρες για εξέταση:</strong> Η εξέταση είναι σήμερα!<br>';
-      }
+    if ($subject['assignment_date']) {
+        echo '<p><strong>Ημερομηνία Ανάθεσης:</strong> '.$subject['assignment_date'].'</p>';
     }
-    echo '</div></div>';
-}}
-
+    if ($subject['pres_date']) {
+        echo '<p><strong>Ημερομηνία Παρουσίασης:</strong> '.$subject['pres_date'].'</p>';
+    }
+    if ($subject['grade'] !== null) {
+        echo '<p><strong>Βαθμός:</strong> '.$subject['grade'].'</p>';
+    }
+    echo '</div>';
+}
 ?>
+</div>
 
-<h2 class="title">Ως Μέλος Τριμελούς Επιτροπής</h2>
-<?php
-if($subjects!=null){
-foreach ($subjects as $subject) {
-  if($subject['committee']!=null){
-    foreach ($subject['committee'] as $member) { 
-        if ($member == $id) {
-        echo '<div class="container">';
-        echo '<div class="card">';
-        echo '<strong>Τίτλος:</strong> ' . htmlspecialchars($subject['name']) . '<br>';
-        echo '<strong>Περιγραφή:</strong> ' . htmlspecialchars($subject['description']) . '<br>';
-        echo '<strong>Επιβλέπων:</strong> ' . htmlspecialchars($subject['professor_surname']) . '<br>';
-        echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subject['student_number']) . '<br>';
-        echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subject['status']) . '<br>';
-        echo '<strong>Τριμελής Επιτροπή:</strong>' ;
-        foreach($subject['committee'] as $prof_id){
-          foreach($professors as $professor) {
-            if($professor['id'] == $prof_id) {
-              echo $professor['surname'].' '.$professor['name'].'<br>Τομέας:'. $professor['department'],'<br><hr style=" margin-left:0;border: 1px solid black; width: 10%;">'; 
-            }
-        }
-        }    
-        echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subject['assignment_date']) . '<br>';
-        $exDate=$subject['pres_date'];
-        if($exDate){
-          $today = date("Y-m-d");
-          $todayDate = new DateTime($today);
-          $exDateObj = new DateTime($exDate);
-          if ($exDateObj > $todayDate) {
-              $interval = $todayDate->diff($exDateObj);
-              echo '<strong>Ημέρες για εξέταση:</strong> ' . htmlspecialchars($interval->days) . ' ημέρες<br>';
-          } elseif ($exDateObj == $todayDate) {
-              echo '<strong>Ημέρες για εξέταση:</strong> Η εξέταση είναι σήμερα!<br>';
-          } else {
-              echo '<strong>Ημέρες για εξέταση:</strong> Περασμένη ημερομηνία<br>';
-              if ($subject['grade']!=null){
-              echo '<strong>Βαθμός:</strong> ' . htmlspecialchars($subject['grade']) . '<br>';
-              }
-          }
-        }
-        echo '</div></div>';
-}}
-  }}}
-?>
 <h2 class="title">Στατιστικά Καθηγητή</h2>
 
 <div class="card2">
@@ -298,13 +308,27 @@ foreach ($subjects as $subject) {
       $days_asMemb_counter = $days_asMemb_counter+$var;
   }}
   echo "<h2 class='statTitle'>Ως επιβλέπων καθηγητής</h2>";
-  if($days_asProf_counter> 0) {$avg_asProf_days=($days_asProf_counter/$prof_counter);echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asProf_days.' μέρες<br><br>';}else{echo "";}
-  if($grade_asProf_counter>0) {$avg_asProf_grade=($grade_asProf_counter/$prof_counter);echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asProf_grade, 2).'<br><br>';}else{echo "";}
+    if($days_asProf_counter> 0) {
+      $avg_asProf_days=($days_asProf_counter/$prof_counter);
+      echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asProf_days.' μέρες<br><br>';
+    }else{echo "";}
+    if($grade_asProf_counter>0) {
+      $avg_asProf_grade=($grade_asProf_counter/$prof_counter);
+      echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asProf_grade, 2).'<br><br>';
+    }else{echo "";}
   echo '<strong>Συνολικό πλήθος διπλωματικών:</strong>'.$prof_counter.' Διπλωματικές<br><br>';
+
   echo "<h2 class='statTitle'>Ως μέλος τριμελούς επιτροπής</h2>";
-  if($days_asMemb_counter> 0) {$avg_asMemb_days=($days_asMemb_counter/$member_counter);echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asMemb_days.' μέρες<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
-  if($grade_asMemb_counter>0) {$avg_asMemb_grade=($grade_asMemb_counter/$member_counter);echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asMemb_grade, 2).'<br><br>';}else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
+    if($days_asMemb_counter> 0) {
+      $avg_asMemb_days=($days_asMemb_counter/$member_counter);
+      echo '<strong>Μέσος χρόνος περάτωσης διπλωματικών:</strong>'.$avg_asMemb_days.' μέρες<br><br>';
+    }else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
+    if($grade_asMemb_counter>0) {
+      $avg_asMemb_grade=($grade_asMemb_counter/$member_counter);
+      echo '<strong>Μέσος βαθμός διπλωματικών:</strong>'.round($avg_asMemb_grade, 2).'<br><br>';
+    }else{echo "Δεν βρέθηκαν μαθήματα<br><br>";}
   echo '<strong>Συνολικό πλήθος διπλωματικών:</strong>'.$member_counter.' Διπλωματικές';
+
   echo '<form action="stats.php" method="post">
     <button class="button2" type="submit">Αναλυτική Προβολή Στατιστικών</button>';
 ?>
@@ -312,5 +336,3 @@ foreach ($subjects as $subject) {
 
 </body>
 </html>
-
-
