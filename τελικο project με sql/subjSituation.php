@@ -174,6 +174,7 @@ if ($subjectFound) {
     echo '<strong>Επιβλέπων:</strong> ' . htmlspecialchars($subjectFound['professor_surname']) . '<br>';
     echo '<strong>ΑΜ Φοιτητή:</strong> ' . htmlspecialchars($subjectFound['student_number']) . '<br>';
     echo '<strong>Κατάσταση:</strong> ' . htmlspecialchars($subjectFound['status']) . '<br>';
+    echo '<strong>Αίθουσα Παρουσίασης:</strong>'.htmlspecialchars($subjectFound['pres_class']) . '<br>' ;
     echo '<strong>Τριμελής Επιτροπή:</strong><br>' ;
     foreach($subjectFound['committee'] as $prof_id){
       foreach($professors as $professor) {
