@@ -184,6 +184,8 @@ if ($subjectFound) {
       }
     }    
     echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subjectFound['assignment_date']) . '<br>';
+    echo '<strong>Βαθμός:</strong> ' . htmlspecialchars($subjectFound['grade']) . '<br>';
+
     $exDate=$subjectFound['pres_date'];
     if($exDate){
       $today = date("Y-m-d");
