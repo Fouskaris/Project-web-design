@@ -274,6 +274,10 @@ foreach ($subjects as $subject) {
     if ($subject['grade'] !== null) {
         echo '<p><strong>Βαθμός:</strong> '.$subject['grade'].'</p>';
     }
+    if ($subject['status'] === 'Περατωμένη') {
+        echo '<p><a href="https://nemertes.library.upatras.gr/home" target="_blank">
+              Δείτε το τελικό κείμενο στο αποθετήριο της βιβλιοθήκης</a></p>';
+    }
     echo '</div>';
 }
 ?>
@@ -336,3 +340,4 @@ foreach ($subjects as $subject) {
 
 </body>
 </html>
+
