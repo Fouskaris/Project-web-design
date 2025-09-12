@@ -185,7 +185,8 @@ if ($subjectFound) {
       }
     }    
     echo '<strong>Ημερομηνία Ανάθεσης:</strong> ' . htmlspecialchars($subjectFound['assignment_date']) . '<br>';
-    echo '<strong>Βαθμός:</strong> ' . htmlspecialchars($subjectFound['grade']) . '<br>';
+    if (($subjectFound['grade'])){
+    echo '<strong>Βαθμός:</strong> ' . htmlspecialchars($subjectFound['grade']) . '<br>';}
      if ($subjectFound['status'] === 'Περατωμένη') {
         echo '<p><a href="https://nemertes.library.upatras.gr/home" target="_blank">
               Δείτε το τελικό κείμενο στο αποθετήριο της βιβλιοθήκης</a></p>';
