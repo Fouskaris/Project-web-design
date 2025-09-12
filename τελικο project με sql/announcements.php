@@ -1,30 +1,27 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db   = 'root';  
-
-$conn = mysqli_connect($host, $user, $pass, $db);
-
-if (!$conn) {
-    die("Σφάλμα σύνδεσης: " . mysqli_connect_error());
-}
-
-mysqli_set_charset($conn, "utf8mb4");
 $format = $_GET['format'] ?? 'html';
 
-$sql = "SELECT id, title, presentation_date , description 
-        FROM announcements 
-        ORDER BY presentation_date DESC";
-$result = $conn->query($sql);
+$jsonFile = 'dipl.json';
+if (!file_exists($jsonFile)) {
+    die("Το αρχείο JSON δεν βρέθηκε!");
+}
+
+$jsonData = file_get_contents($jsonFile);
+$dataArray = json_decode($jsonData, true);
+
+if (!$dataArray || !isset($dataArray['subjects'])) {
+    die("Μη έγκυρα δεδομένα JSON!");
+}
+
+$announcements = $dataArray['subjects'];
+
+$announcements = array_filter($announcements, function($row) {
+    return !empty($row['pres_date']);
+});
 
 if ($format === 'json') {
-    header('Content-Type: application/json; charset=utf-8'); 
-    $data = [];
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row; 
-    }
-    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); 
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($announcements, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     exit;
 }
 
@@ -32,18 +29,17 @@ if ($format === 'xml') {
     header('Content-Type: text/xml; charset=utf-8');
     echo "<?xml version='1.0' encoding='UTF-8'?>";
     echo "<announcements>";
-    while ($row = $result->fetch_assoc()) {
+    foreach ($announcements as $row) {
         echo "<announcement>";
         echo "<id>".$row['id']."</id>";
-        echo "<title>".htmlspecialchars($row['title'])."</title>";
-        echo "<presentation_date>".$row['presentation_date']."</presentation_date>";
+        echo "<title>".htmlspecialchars($row['name'])."</title>";
+        echo "<presentation_date>".$row['pres_date']."</presentation_date>";
         echo "<description>".htmlspecialchars($row['description'])."</description>";
         echo "</announcement>";
     }
     echo "</announcements>";
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="el">
@@ -121,10 +117,10 @@ if ($format === 'xml') {
       <th>Ημερομηνία Παρουσίασης</th>
       <th>Περιγραφή</th>
     </tr>
-    <?php while ($row = $result->fetch_assoc()) { ?>
+    <?php foreach ($announcements as $row) { ?>
     <tr>
-      <td><?= htmlspecialchars($row['title']) ?></td>
-      <td><?= $row['presentation_date'] ?></td>
+      <td><?= htmlspecialchars($row['name']) ?></td>
+      <td><?= $row['pres_date'] ?? '-' ?></td>
       <td><?= htmlspecialchars($row['description']) ?></td>
     </tr>
     <?php } ?>
