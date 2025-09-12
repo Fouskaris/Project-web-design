@@ -1,7 +1,7 @@
 <?php
 $format = $_GET['format'] ?? 'html';
 
-$jsonFile = 'dipl.json';
+$jsonFile = 'announcements.json';
 if (!file_exists($jsonFile)) {
     die("Το αρχείο JSON δεν βρέθηκε!");
 }
@@ -9,15 +9,11 @@ if (!file_exists($jsonFile)) {
 $jsonData = file_get_contents($jsonFile);
 $dataArray = json_decode($jsonData, true);
 
-if (!$dataArray || !isset($dataArray['subjects'])) {
+if (!$dataArray || !isset($dataArray['announcements'])) {
     die("Μη έγκυρα δεδομένα JSON!");
 }
 
-$announcements = $dataArray['subjects'];
-
-$announcements = array_filter($announcements, function($row) {
-    return !empty($row['pres_date']);
-});
+$announcements = $dataArray['announcements'];
 
 if ($format === 'json') {
     header('Content-Type: application/json; charset=utf-8');
@@ -119,9 +115,9 @@ if ($format === 'xml') {
     </tr>
     <?php foreach ($announcements as $row) { ?>
     <tr>
-      <td><?= htmlspecialchars($row['name']) ?></td>
-      <td><?= $row['pres_date'] ?? '-' ?></td>
-      <td><?= htmlspecialchars($row['description']) ?></td>
+      <td><?= htmlspecialchars($row['title']) ?></td>
+      <td><?= $row['date'] ?></td>
+      <td><?= htmlspecialchars($row['message']) ?></td>
     </tr>
     <?php } ?>
   </table>
