@@ -197,8 +197,8 @@ if ($found) {
             } else {
                 echo "<div class='small'>Δεν υπάρχει πρόχειρο κείμενο.</div>";
             }
-            if (!empty($subject['presentation_date']) && !empty($subject['presentation_room']) && !empty($subject['presentation_time'])) {
-                echo "<div class='small'>Στοιχεία παρουσίασης: ".htmlspecialchars($subject['presentation_date'])." ".htmlspecialchars($subject['presentation_time'])." , Δωμάτιο: ".htmlspecialchars($subject['presentation_room'])."</div>";
+            if (!empty($subject['pres_date']) && !empty($subject['pres_class'])) {
+                echo "<div class='small'>Στοιχεία παρουσίασης: ".htmlspecialchars($subject['pres_date'])." , Αιθουσα: ".htmlspecialchars($subject['pres_class'])."</div>";
                 echo "<form action='generate_announcement.php' method='POST' style='margin-top:6px;'>
                         <input type='hidden' name='subj_id' value='".htmlspecialchars($subj_id, ENT_QUOTES, 'UTF-8')."'>
                         <button class='listButton' type='submit'>Παραγωγή Ανακοίνωσης</button>
