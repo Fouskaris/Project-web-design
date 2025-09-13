@@ -85,7 +85,7 @@ foreach ($students as &$stud) {
 foreach($professors as &$professor) {
     if ($professor['id']==$prof_subj) {
         $newNotification2['id'] = uniqid();
-        $professor['notification'][] = $newNotification2;
+        $professor['notifications'][] = $newNotification2;
         break;
     }}
 file_put_contents('export.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
