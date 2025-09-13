@@ -6,30 +6,28 @@
             "id": "1",
             "name": "Ανάπτυξη Εφαρμογής Ανίχνευσης Ψευδών Ειδήσεων με Χρήση NLP και Machine Learning",
             "description": "Σχεδίαση και υλοποίηση ενός συστήματος που λαμβάνει άρθρα και εντοπίζει αν πρόκειται για ψευδείς ειδήσεις με χρήση τεχνικών φυσικής γλώσσας (NLP) και αλγορίθμων μηχανικής μάθησης.",
-            "professor_surname": "Bartzokas",
-            "professor_id": "56",
+            "professor_surname": "Komninos",
+            "professor_id": "1",
             "student_number": "10433999",
             "status": "Ενεργή",
             "assignment_date": "2025-02-01",
             "file": [
-                "topic.pdf",
-                "important_files.pdf",
-                "Θέματα Φεβρουάριος 2025.pdf",
-                "Entity-Relationships Diagram.jpg"
+                "topic.pdf"
             ],
             "committee": [
-                1,
-                45
+                1,9,10
+                
             ],
-            "pres_date": "2028-02-03",
-            "grade": null
+            "pres_date": "2026-02-21",
+            "grade": null,
+            "pres_class": "β"
         },
         {
             "id": "2",
             "name": "Σχεδίαση και Υλοποίηση Έξυπνου Συστήματος Προτάσεων Μαθημάτων με Χρήση Συστημάτων Συστάσεων",
             "description": "Σχεδίαση και Υλοποίηση Έξυπνου Συστήματος Προτάσεων Μαθημάτων με Χρήση Συστημάτων Συστάσεων",
-            "professor_surname": "koutsikos",
-            "professor_id": "35",
+            "professor_surname": "Kostantinou",
+            "professor_id": "8",
             "student_number": "0",
             "status": "Διαθέσιμη",
             "assignment_date": null,
@@ -45,8 +43,8 @@
             "id": "3",
             "name": "Ανάπτυξη Αλγορίθμων Μηχανικής Μάθησης για Ανίχνευση Ανωμαλιών σε Δίκτυα",
             "description": "Μελέτη και υλοποίηση μεθόδων για την αυτόματη ανίχνευση ασυνήθιστης δραστηριότητας σε δίκτυα υπολογιστών.",
-            "professor_surname": "Makaveli",
-            "professor_id": "14",
+            "professor_surname": "Papadopoulos",
+            "professor_id": "7",
             "student_number": "0",
             "status": "Διαθέσιμη",
             "assignment_date": null,
@@ -62,16 +60,16 @@
             "id": "4",
             "name": "Ανάλυση και Βελτιστοποίηση Αλγορίθμων Ταξινόμησης Μεγάλων Δεδομένων",
             "description": "Έρευνα σε αλγόριθμους που επιτρέπουν την γρήγορη και ακριβή ταξινόμηση δεδομένων σε μεγάλα σύνολα (big data).",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": "0",
-            "status": "Υπό Εξέταση",
+            "professor_surname": "Danezis",
+            "professor_id": "6",
+            "student_number": "10434007",
+            "status": "Ενεργή",
             "assignment_date": null,
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [],
+            "committee": [4,5,6],
             "pres_date": null,
             "grade": null
         },
@@ -79,10 +77,10 @@
             "id": "5",
             "name": "Εφαρμογή Τεχνητής Νοημοσύνης για Αυτόματη Αναγνώριση Φωνής σε Ελληνικά",
             "description": "Ανάπτυξη μοντέλου φωνητικής αναγνώρισης ειδικά για την ελληνική γλώσσα, με χρήση νευρωνικών δικτύων.",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "10434004",
-            "status": "Υπό Εξέταση",
+            "professor_surname": "Karanikolos",
+            "professor_id": "4",
+            "student_number": "10434005",
+            "status": "Ενεργή",
             "assignment_date": "21-07-2024",
             "file": [
                 "topic.pdf",
@@ -96,9 +94,9 @@
             "id": "6",
             "name": "Ασφάλεια Εφαρμογών Κινητών: Ανάλυση Ευπαθειών και Προτάσεις Βελτίωσης",
             "description": "Μελέτη των πιο συχνών ευπαθειών σε εφαρμογές Android ή iOS και σχεδιασμός πρακτικών βελτίωσης.",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "10434092",
+            "professor_surname": "Nikolaou",
+            "professor_id": "5",
+            "student_number": "10434004",
             "status": "Ενεργή",
             "assignment_date": "21-07-2025",
             "file": [
@@ -113,9 +111,9 @@
             "id": "7",
             "name": "Τεστ",
             "description": "Τεστ",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "1",
+            "professor_surname": "9",
+            "professor_id": "Nikolaou",
+            "student_number": "10434003",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
             "file": [
@@ -130,16 +128,16 @@
             "id": "8",
             "name": "Τεστ",
             "description": "Τεστ",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "1",
+            "professor_surname": "Voyiatzaki",
+            "professor_id": "3",
+            "student_number": "10434002",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [],
+            "committee": [3,5,4],
             "pres_date": "30-07-2023",
             "grade": 5
         },
@@ -147,26 +145,26 @@
             "id": "9",
             "name": "Τεστ",
             "description": "Τεστ",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "1",
+            "professor_surname": "2",
+            "professor_id": "Petropoulos",
+            "student_number": "10434001",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
             "file": [
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [],
+            "committee": [2,4,7],
             "pres_date": "30-07-2023",
             "grade": 8
         },
         {
             "id": "10",
-            "name": "Τεστ",
-            "description": "Τεστ",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": "1",
+            "name": "Test",
+            "description": "Test",
+            "professor_surname": "Nikolaou",
+            "professor_id": "9",
+            "student_number": "10434000",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
             "file": [
@@ -174,119 +172,10 @@
                 "important_files.pdf"
             ],
             "committee": [
-                32
+                9,5,4
             ],
             "pres_date": "30-07-2023",
             "grade": 10
-        },
-        {
-            "id": "11",
-            "name": "Τεστ",
-            "description": "Τεστ",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": "1",
-            "status": "Περατωμένη",
-            "assignment_date": "21-07-2023",
-            "file": [
-                "topic.pdf",
-                "important_files.pdf"
-            ],
-            "committee": [
-                32
-            ],
-            "pres_date": "30-07-2023",
-            "grade": 8
-        },
-        {
-            "id": "12",
-            "name": "ΑΑΑΑΑΑΑΑΑ",
-            "description": "Τεστ",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": "1",
-            "status": "Ενεργή",
-            "assignment_date": "21-07-2023",
-            "file": [
-                "topic.pdf",
-                "important_files.pdf"
-            ],
-            "committee": [
-                32
-            ],
-            "pres_date": "21-07-2025",
-            "grade": null
-        },
-        {
-            "id": "13",
-            "name": "ΑΑΑΑΑΑΑΑΑ",
-            "description": "Τεστ",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": null,
-            "status": "Υπό Eξέταση",
-            "assignment_date": "21-07-2023",
-            "file": [
-                "topic.pdf",
-                "important_files.pdf",
-                "dipl.json",
-                "Entity-Relationships Diagram.jpg"
-            ],
-            "committee": [
-                32
-            ],
-            "pres_date": "21-07-2025",
-            "grade": 0
-        },
-        {
-            "id": "14",
-            "name": "Testing Grade2",
-            "description": "Tests grade\r\n",
-            "professor_surname": "Musk",
-            "professor_id": 29,
-            "student_number": 10434000,
-            "status": "Υπό Εξέταση",
-            "assignment_date": "23-07-2025",
-            "file": [],
-            "committee": [],
-            "pres_date": null,
-            "grade": 0
-        },
-        {
-            "id": "15",
-            "name": "Τεστ",
-            "description": "Τεστ",
-            "professor_surname": "Fousekis",
-            "professor_id": "32",
-            "student_number": "1",
-            "status": "Περατωμένη",
-            "assignment_date": "21-07-2023",
-            "file": [
-                "topic.pdf",
-                "important_files.pdf"
-            ],
-            "committee": [],
-            "pres_date": "30-07-2023",
-            "grade": 9
-        },
-        {
-            "id": "16",
-            "name": "Τεστ",
-            "description": "Τεστ",
-            "professor_surname": "Musk",
-            "professor_id": "29",
-            "student_number": "1",
-            "status": "Περατωμένη",
-            "assignment_date": "21-07-2023",
-            "file": [
-                "topic.pdf",
-                "important_files.pdf"
-            ],
-            "committee": [
-                32
-            ],
-            "pres_date": "30-07-2023",
-            "grade": 8
         }
     ]
 }
