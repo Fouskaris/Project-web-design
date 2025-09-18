@@ -1,3 +1,19 @@
+<?php
+session_start();
+$idStudent = $_SESSION['Stud_id'] ?? null;
+if (!$idStudent) {
+    header('Location: login.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ia'])) {
+    $id = (int)$_POST['ia'];
+    header("Location: " . $_SERVER['PHP_SELF'] . "?ia=" . urlencode($id));
+    exit;
+}
+
+$id = isset($_GET['ia']) ? (int)$_GET['ia'] : null;
+?>
 <!DOCTYPE html>  
 <html lang="el">
 <head>
@@ -5,6 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Σύστημα Υποστήριξης Διπλωματικών Εργασιών Πανεπιστημίου Πατρών</title>
 <style>
+
   body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -115,7 +132,6 @@
 </div>
 
 <?php
-$id = isset($_POST['ia']) ? (int)$_POST['ia'] : null;
 $jsonString = file_get_contents("dipl.json");
 $data = json_decode($jsonString, true);
 
@@ -141,15 +157,10 @@ if ($id !== null && isset($data['subjects']) && is_array($data['subjects'])) {
     // Υπολογισμός ημερών από ανάθεση
     if (!empty($subjectFound['assignment_date'])) {
         $dateStr = $subjectFound['assignment_date'];
-
-        // Προσπαθούμε πρώτα με format YYYY-MM-DD
         $dateObj = DateTime::createFromFormat("Y-m-d", $dateStr);
-
-        // Αν δεν πετύχει, δοκιμάζουμε format DD-MM-YYYY
         if (!$dateObj) {
             $dateObj = DateTime::createFromFormat("d-m-Y", $dateStr);
         }
-
         if ($dateObj) {
             $today = new DateTime();
             $diff = $dateObj->diff($today)->days;
