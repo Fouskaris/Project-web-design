@@ -118,8 +118,13 @@ body {
   border-radius: 0 0 20px 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-.wrapper:hover .onHover { display: block; }
-.wrapper:hover .droppage { background: rgba(196, 93, 24, 0.63); border-radius: 20px 20px 0 0; }
+.wrapper:hover .onHover { 
+  display: block; 
+}
+.wrapper:hover .droppage { 
+  background: rgba(196, 93, 24, 0.63); 
+  border-radius: 20px 20px 0 0; 
+}
 .prof-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -141,12 +146,33 @@ body {
   align-items: center;
   gap: 5px;
 }
-.prof-card h4 { margin: 0; font-size: 1em; text-align: center; }
-.prof-card p { margin: 0; font-size: 0.9em; text-align: center; }
-.prof-card input[type="checkbox"] { margin-top: 5px; }
-.depclass, .depclasstext { text-align: center; }
-.exDate { margin:auto; margin-top:1em; margin-bottom:1em; font-size:1.2em; }
-#finalSub { height: 50px; width: 250px; margin-top:1em; }
+.prof-card h4 { 
+  margin: 0; 
+  font-size: 1em; 
+  text-align: center; 
+}
+.prof-card p { 
+  margin: 0; 
+  font-size: 0.9em; 
+  text-align: center; 
+}
+.prof-card input[type="checkbox"] { 
+  margin-top: 5px; 
+}
+.depclass, .depclasstext { 
+  text-align: center; 
+}
+.exDate { 
+  margin:auto; 
+  margin-top:1em; 
+  margin-bottom:1em; 
+  font-size:1.2em; 
+}
+#finalSub { 
+  height: 50px; 
+  width: 250px; 
+  margin-top:1em; 
+}
 
 @media (max-width:768px){
   body { padding-top: 140px; }
@@ -295,6 +321,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <button class="submBu" id="finalSub" type="submit" onclick="alert('Η υποβολή έγινε με επιτυχία!')">Υποβολή Ημερομηνίας και Αίθουσας</button>
 </form>
 <hr style="border: 1px solid black; width: 90%;">
+
+<div style="text-align:center; margin-top:20px;">
+  <a href="StudentHomeScreen.php?id=<?php echo $id; ?>" class="submBu" style="text-decoration: none;">Επιστροφή</a>
+</div>
 
 </body>
 </html>
