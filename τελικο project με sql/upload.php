@@ -154,7 +154,8 @@ if (!empty($uploadedFiles)) {
 ?>
 
 <h1 style="margin-left:auto;margin-top:5em;">Επιτυχής Ανέβασμα Αρχείων</h1>  
-<a href="subjMater.php" class="retbut">Επιστροφή</a>
+<a href="subjMater.php" class="retbut" style="text-decoration: none;">Επιστροφή</a>
 
 </body>
 </html>
+
