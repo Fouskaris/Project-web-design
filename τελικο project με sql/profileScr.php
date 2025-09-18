@@ -2,7 +2,6 @@
 <html lang="el">
 <?php
 session_start();
-
 if (!isset($_SESSION['Stud_id'])) {
     header('Location: loginScr.php');
     exit;
@@ -21,7 +20,6 @@ foreach ($students as &$student) {
     }
 }
 
-$message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_number'], $_POST['name'], $_POST['surname'], $_POST['email'])) {
     $student_number = trim($_POST['student_number']);
     $new_name = trim($_POST['name']);
@@ -34,14 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_number'], $_P
                 $student['name'] = $new_name;
                 $student['surname'] = $new_surname;
                 $student['email'] = $new_email;
-                $message = "Το προφίλ ενημερώθηκε με επιτυχία.";
                 break;
             }
         }
         file_put_contents($json_file, json_encode($studentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $_SESSION['message'] = "Το προφίλ ενημερώθηκε με επιτυχία.";
     } else {
-        $message = "Μη έγκυρο email.";
+        $_SESSION['message'] = "Μη έγκυρο email.";
     }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 ?>
 <head>
@@ -228,8 +229,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_number'], $_P
 <h1 class="Pageheader">Προφίλ</h1>
 
 <?php
-if (!empty($message)) {
-    echo "<p style='color:green; font-weight:bold; margin-left:7em;'>$message</p>";
+if (!empty($_SESSION['message'])) {
+    echo "<p style='color:green; font-weight:bold; margin-left:7em;'>" . $_SESSION['message'] . "</p>";
+    unset($_SESSION['message']);
 }
 
 if ($studentFound) {
@@ -292,7 +294,7 @@ if (empty($studentFound['notifications'])) {
 file_put_contents($json_file, json_encode($studentData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 ?>
 
-<button type="button" class="button back-btn" onclick="history.back()">Επιστροφή</button>
+<a href="StudentHomeScreen.php?id=<?php echo $id; ?>" class="button back-btn" style="text-decoration: none;">Επιστροφή</a>
 
 </body>
 </html>
