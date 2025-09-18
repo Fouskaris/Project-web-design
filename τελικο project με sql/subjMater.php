@@ -247,6 +247,9 @@ if ($subj_id == 0) {
     <button class="submBu" type="submit">Υποβολή</button>
   </div>
 </form>
+<div style="text-align:center; margin-top:20px;">
+  <a href="StudentHomeScreen.php?id=<?php echo $id; ?>" class="submBu" style="text-decoration: none;">Επιστροφή</a>
+</div>
 <?php endif; ?>
 
 <script>
@@ -263,3 +266,4 @@ function addFileInput() {
 
 </body>
 </html>
+
