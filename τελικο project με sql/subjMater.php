@@ -176,8 +176,7 @@ $id = $_SESSION['Stud_id'];
   <div class="menu-title">Σύστημα Υποστήριξης Διπλωματικών Εργασιών</div>
   <button class="button">
     <span class="lable">
-      <?php
-        $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+            <?php
         $jsonString = file_get_contents("export.json");
         $data = json_decode($jsonString, true);
         $students = $data['students'];
@@ -212,14 +211,14 @@ if ($subj_id == 0) {
   echo "<h1 style='color:red;'>Πρέπει να υπάρχει ενεργή διπλωματική εργασία για να ανεβάσεις αρχεία</h1>";
 } else {
   echo "<h1>$subj_name</h1>";
-  echo "<h1 class='h1file'>Ανέβασμένα Αρχεία:</h1>";
+  echo "<h1 class='h1file'>Ανεβασμένα Αρχεία:</h1>";
   echo "<div style='margin:auto; text-align:center;'>";
   $fileCount = 0;
   foreach ($subjects as $subject) {
     if ($subject['id'] === $subj_id && isset($subject['file']) && is_array($subject['file'])) {
       $fileCount = count($subject['file']);
       foreach ($subject["file"] as $filename) {
-        echo "<a href='http://localhost/projj/$filename' download>$filename</a><br>";
+        echo "<a href='uploads/$filename' download>$filename</a><br>";
       }
       break;
     }
@@ -243,7 +242,8 @@ if ($subj_id == 0) {
         <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4'/>
       </svg>
     </button>
-    <input type="hidden" name="id" value="<?php echo $subj_id; ?>">
+    <input type="hidden" name="stud_id" value="<?php echo $id; ?>">
+    <input type="hidden" name="subj_id" value="<?php echo $subj_id; ?>">
     <button class="submBu" type="submit">Υποβολή</button>
   </div>
 </form>
@@ -263,4 +263,3 @@ function addFileInput() {
 
 </body>
 </html>
-
