@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html lang="el">
 <?php
 session_start();
 if (!isset($_SESSION['Stud_id'])) {
     header('Location: login.php');
     exit;
 }
+
 $id = $_SESSION['Stud_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $post_id = (int)$_POST['id'];
+    $jsonString = file_get_contents("export.json");
+    $data = json_decode($jsonString, true);
+    $stud_num = "";
+
+    foreach ($data['students'] as $student) {
+        if ($student['id'] == $post_id) {
+            $stud_num = $student['student_number'];
+            break;
+        }
+    }
+
+    header("Location: " . $_SERVER['PHP_SELF'] . "?stud_num=" . urlencode($stud_num));
+    exit;
+}
+
+$stud_num = isset($_GET['stud_num']) ? $_GET['stud_num'] : '';
 ?>
+<!DOCTYPE html>
+<html lang="el">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -173,20 +193,7 @@ $id = $_SESSION['Stud_id'];
   <div class="menu-title">Σύστημα Υποστήριξης Διπλωματικών Εργασιών</div>
   <button class="button">
     <span class="lable">
-      <?php
-        $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-        $jsonString = file_get_contents("export.json");
-        $data = json_decode($jsonString, true);
-        $students = $data['students'];
-        $stud_num = "";
-        foreach ($students as $student) {
-          if ($student['id'] == $id) {
-            $stud_num = $student['student_number'];
-            break;
-          }
-        }
-        echo $stud_num;
-      ?>
+      <?php echo htmlspecialchars($stud_num); ?>
     </span>
   </button>
 </div>
@@ -209,8 +216,8 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
           <th>Ενέργεια</th>
         </tr>";
     foreach ($subjects as $subject) {
-      if ($subject['student_number']==$stud_num){
-        $idSubj=$subject['id'];
+      if ($subject['student_number'] == $stud_num){
+        $idSubj = $subject['id'];
         echo "<tr>
           <td>" . htmlspecialchars($subject['id']) . "</td>
           <td>" . htmlspecialchars($subject['name']) . "</td>
@@ -239,9 +246,8 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
         <th>Καθηγητής</th>
         <th>Ενέργεια</th>
       </tr>";
-      
     foreach ($subjects as $subject) {
-      $idSubj=$subject['id'];
+      $idSubj = $subject['id'];
         echo "<tr>
           <td>" . htmlspecialchars($subject['id']) . "</td>
           <td>" . htmlspecialchars($subject['name']) . "</td>
