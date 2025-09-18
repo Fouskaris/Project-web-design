@@ -97,19 +97,23 @@
   </button>
 </div>
 <?php
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+session_start();
+$stud_id = $_SESSION['Stud_id'];
+
 $studentData = json_decode(file_get_contents("export.json"), true);
 $students = $studentData['students'];
 $stud_num = "";
 foreach ($students as $student) {
-    if ($student['id'] == $id) {
+    if ($student['id'] == $stud_id) {
         $stud_num = $student['student_number'];
         break;
     }
 }
 
-$targetDir = ""; 
+$subj_id = isset($_POST['subj_id']) ? (int)$_POST['subj_id'] : 0;
 
+$targetDir = "uploads/";
+if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
 
 $uploadedFiles = [];
 
@@ -131,7 +135,7 @@ if (!empty($uploadedFiles)) {
     $data = json_decode(file_get_contents($jsonfile), true);
 
     foreach ($data['subjects'] as &$entry) {
-        if ($entry["student_number"] == $stud_num) {
+        if ($entry["student_number"] == $stud_num && $entry['id'] == $subj_id) {
             if (!isset($entry['file']) || !is_array($entry['file'])) {
                 $entry['file'] = [];
             }
@@ -141,20 +145,16 @@ if (!empty($uploadedFiles)) {
                     $entry['file'][] = $file;
                 }
             }
-
             break;
         }
     }
 
     file_put_contents($jsonfile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
-
-
 ?>
+
 <h1 style="margin-left:auto;margin-top:5em;">Επιτυχής Ανέβασμα Αρχείων</h1>  
-<button class="retbut" onclick="history.back()">Επιστροφή</button>
+<a href="subjMater.php" class="retbut">Επιστροφή</a>
+
 </body>
 </html>
-
-
-
