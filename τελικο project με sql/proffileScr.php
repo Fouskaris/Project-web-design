@@ -199,27 +199,25 @@ if ($profFound) {
       echo '<input type="hidden" name="id" value="' . htmlspecialchars($profFound['id']) . '">';
 
       echo '<label><strong>Όνομα:</strong></label><br>';
-      echo '<input class="inp" type="text" name="name" value="' . htmlspecialchars($profFound['name']) . '"><br><br>';
+      echo '<input class="inp" type="text" name="name" value="' . htmlspecialchars($profFound['name']) . '"disabled><br><br>';
 
       echo '<label><strong>Επίθετο:</strong></label><br>';
-      echo '<input class="inp" type="text" name="surname" value="' . htmlspecialchars($profFound['surname']) . '"><br><br>';
+      echo '<input class="inp" type="text" name="surname" value="' . htmlspecialchars($profFound['surname']) . '"disabled><br><br>';
 
       echo '<label><strong>Τομέας:</strong></label><br>';
-      echo '<input class="inp" type="text" value="' . htmlspecialchars($profFound['topic']) . '"><br><br>';
+      echo '<input class="inp" type="text" value="' . htmlspecialchars($profFound['topic']) . '"disabled><br><br>';
 
       echo '<label><strong>Email:</strong></label><br>';
-      echo '<input class="inp" type="email" name="email" value="' . htmlspecialchars($profFound['email']) . '"><br><br>';
+      echo '<input class="inp" type="email" name="email" value="' . htmlspecialchars($profFound['email']) . '"disabled><br><br>';
       
       echo '<label><strong>Σταθερό:</strong></label><br>';
-      echo '<input class="inp" type="text" name="text" value="' . htmlspecialchars($profFound['landline']) . '"><br><br>';
+      echo '<input class="inp" type="text" name="text" value="' . htmlspecialchars($profFound['landline']) . '"disabled><br><br>';
 
       echo '<label><strong>Τμήμα:</strong></label><br>';
-      echo '<input class="inp" type="text" name="dep" value="' . htmlspecialchars($profFound['department']) . '"><br><br>';
+      echo '<input class="inp" type="text" name="dep" value="' . htmlspecialchars($profFound['department']) . '"disabled><br><br>';
       
       echo '<label><strong>Πανεπιστήμιο:</strong></label><br>';
-      echo '<input class="inp" type="text" name="uni" value="' . htmlspecialchars($profFound['university']) . '"><br><br>';
-
-      echo '<button type="submit" class="button">Αποθήκευση</button> ';
+      echo '<input class="inp" type="text" name="uni" value="' . htmlspecialchars($profFound['university']) . '"disabled><br><br>';
 
       echo '</form>';
       echo '</div>';
