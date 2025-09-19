@@ -135,11 +135,7 @@ const myChart2 = new Chart(ctx2, {
 });
 </script>
 
-<?php    
-  echo '<button class="button" onclick="history.back()">Επιστροφή</button>';
-?>
+<?php echo '<button class="button" onclick="window.location.href=\'subjStatus.php\'">Επιστροφή</button>'; ?>
 
 </body>
-
-
 </html>
