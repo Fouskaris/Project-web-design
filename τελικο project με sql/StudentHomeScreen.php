@@ -5,7 +5,7 @@
 session_start();
 
 if (!isset($_SESSION['Stud_id'])) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 $id = $_SESSION['Stud_id'];
@@ -383,4 +383,5 @@ fetch('announcements.json')
 </script>
 </body>
 </html>
+
 
