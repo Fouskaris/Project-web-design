@@ -2,7 +2,7 @@
 session_start();
 $idStudent = $_SESSION['Stud_id'] ?? null;
 if (!$idStudent) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 
@@ -205,3 +205,4 @@ if ($id !== null && isset($data['subjects']) && is_array($data['subjects'])) {
 
 </body>
 </html>
+
