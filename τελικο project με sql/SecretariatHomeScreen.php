@@ -296,13 +296,13 @@ $id = $_SESSION['Sec_id'];
   <img class="pic" src="upatras.jpg" alt="Image" style="display:block; width:100vw; max-width:650px; height:auto;">
   <div class="menu">
     <h1>Κεντρική σελίδα Γραμματείας</h1>
-    <form action="View_Theses.php" method="post">
+    <form action="View_Theses.php" method="get">
       <button class="button_menu" type="submit">Προβολή Διπλωματικών</button>
     </form>
-    <form action="Import_data.php" method="post">
+    <form action="Import_data.php" method="get">
       <button class="button_menu" type="submit">Εισαγωγή Δεδομένων</button>
     </form>
-    <form action="Manage_Theses.php" method="post">
+    <form action="Manage_Theses.php" method="get">
       <button class="button_menu" type="submit">Διαχείρηση Διπλωματικών</button>
     </form>
   </div>
@@ -342,3 +342,4 @@ fetch('announcements.json')
 </script>
 </body>
 </html>
+
