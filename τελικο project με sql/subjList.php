@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['Stud_id'])) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 
@@ -271,3 +271,4 @@ if (isset($data['subjects']) && is_array($data['subjects'])) {
 
 </body>
 </html>
+
