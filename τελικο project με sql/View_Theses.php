@@ -11,7 +11,7 @@ $subjects = $data["subjects"];
 session_start();
 
 if (!isset($_SESSION['Sec_id'])) {
-    header('Location: login.php');
+    header('Location: loginScr.php');
     exit;
 }
 $id = $_SESSION['Sec_id'];
@@ -146,3 +146,4 @@ foreach ($subjects as $subject) {
 </body>
 
 </html>
+
