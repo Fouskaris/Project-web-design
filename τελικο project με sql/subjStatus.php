@@ -22,7 +22,6 @@ if (isset($_GET['export']) && ($_GET['export'] === 'csv' || $_GET['export'] === 
     $exportData = [];
 
     foreach ($subjects as $subject) {
-        // ρόλος
         $isSupervisor = ($subject['professor_id'] == $id);
         $isCommittee = (is_array($subject['committee']) && in_array($id, $subject['committee']));
 
@@ -274,10 +273,12 @@ foreach ($subjects as $subject) {
     if ($subject['grade'] !== null) {
         echo '<p><strong>Βαθμός:</strong> '.$subject['grade'].'</p>';
     }
+
     if ($subject['status'] === 'Περατωμένη') {
         echo '<p><a href="https://nemertes.library.upatras.gr/home" target="_blank">
               Δείτε το τελικό κείμενο στο αποθετήριο της βιβλιοθήκης</a></p>';
     }
+
     echo '</div>';
 }
 ?>
@@ -338,6 +339,7 @@ foreach ($subjects as $subject) {
 ?>
 </div></div>
 
+<a href="ProfessorHomeScreen.php?id=<?php echo $id; ?>" class="button2" style="text-decoration: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(36, 190, 49, 0.81);">Επιστροφή</a>
+
 </body>
 </html>
-
