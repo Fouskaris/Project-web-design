@@ -244,12 +244,14 @@ if ($subj_id == 0) {
     </button>
     <input type="hidden" name="stud_id" value="<?php echo $id; ?>">
     <input type="hidden" name="subj_id" value="<?php echo $subj_id; ?>">
+    <input type="hidden" name="redirect" value="subjMater.php">
     <button class="submBu" type="submit">Υποβολή</button>
   </div>
 </form>
 <div style="text-align:center; margin-top:20px;">
   <a href="StudentHomeScreen.php?id=<?php echo $id; ?>" class="submBu" style="text-decoration: none;">Επιστροφή</a>
 </div>
+
 <?php endif; ?>
 
 <script>
@@ -266,4 +268,3 @@ function addFileInput() {
 
 </body>
 </html>
-
