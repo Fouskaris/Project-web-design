@@ -15,6 +15,10 @@ if (!$dataArray || !isset($dataArray['announcements'])) {
 
 $announcements = $dataArray['announcements'];
 
+$announcements = array_filter($announcements, function($row) {
+    return isset($row['title']) && $row['title'] === "Εξέταση Διπλωματικής Εργασίας";
+});
+
 if ($format === 'json') {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($announcements, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
