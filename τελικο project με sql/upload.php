@@ -151,11 +151,11 @@ if (!empty($uploadedFiles)) {
 
     file_put_contents($jsonfile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
+$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : "subjCre.php";
 ?>
 
 <h1 style="margin-left:auto;margin-top:5em;">Επιτυχής Ανέβασμα Αρχείων</h1>  
-<a href="subjMater.php" class="retbut" style="text-decoration: none;">Επιστροφή</a>
+<a href="<?php echo htmlspecialchars($redirect); ?>" class="retbut">Επιστροφή</a>
 
 </body>
 </html>
-
