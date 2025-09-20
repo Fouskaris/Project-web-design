@@ -27,5 +27,7 @@ if ($foundstudent !== null) {
 
 
 }
-echo '<script>history.back();</script>';
+header('Location: profileScr.php');
+exit; 
 ?>
+
