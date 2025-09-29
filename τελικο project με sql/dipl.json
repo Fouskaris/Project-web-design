@@ -9,18 +9,20 @@
             "professor_surname": "Komninos",
             "professor_id": "1",
             "student_number": "10433999",
-            "status": "Ενεργή",
+            "status": "Υπό Εξέταση",
             "assignment_date": "2025-02-01",
             "file": [
                 "topic.pdf"
             ],
             "committee": [
-                1,9,10
-                
+                1,
+                9,
+                10
             ],
             "pres_date": "2026-02-21",
             "grade": null,
-            "pres_class": "β"
+            "pres_class": "β",
+            "exam_request_date": "19-09-2025"
         },
         {
             "id": "2",
@@ -69,7 +71,11 @@
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [4,5,6],
+            "committee": [
+                4,
+                5,
+                6
+            ],
             "pres_date": null,
             "grade": null
         },
@@ -111,8 +117,8 @@
             "id": "7",
             "name": "Τεστ",
             "description": "Τεστ",
-            "professor_surname": "9",
-            "professor_id": "Nikolaou",
+            "professor_surname": "Nikolaou",
+            "professor_id": "9",
             "student_number": "10434003",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
@@ -137,7 +143,11 @@
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [3,5,4],
+            "committee": [
+                3,
+                5,
+                4
+            ],
             "pres_date": "30-07-2023",
             "grade": 5
         },
@@ -145,8 +155,8 @@
             "id": "9",
             "name": "Τεστ",
             "description": "Τεστ",
-            "professor_surname": "2",
-            "professor_id": "Petropoulos",
+            "professor_surname": "Petropoulos",
+            "professor_id": "2",
             "student_number": "10434001",
             "status": "Περατωμένη",
             "assignment_date": "21-07-2023",
@@ -154,7 +164,11 @@
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [2,4,7],
+            "committee": [
+                2,
+                4,
+                7
+            ],
             "pres_date": "30-07-2023",
             "grade": 8
         },
@@ -172,7 +186,9 @@
                 "important_files.pdf"
             ],
             "committee": [
-                9,5,4
+                9,
+                5,
+                4
             ],
             "pres_date": "30-07-2023",
             "grade": 10
