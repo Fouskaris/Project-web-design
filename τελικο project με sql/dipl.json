@@ -126,7 +126,7 @@
                 "topic.pdf",
                 "important_files.pdf"
             ],
-            "committee": [],
+            "committee": [9,4,5],
             "pres_date": "30-07-2023",
             "grade": 9
         },
