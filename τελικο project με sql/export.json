@@ -17,26 +17,7 @@
             "landline_telephone": "2610333000",
             "mobile_telephone": "6939096979",
             "email": "104333999@students.upatras.gr",
-            "notifications": [
-                {
-                    "id": 1,
-                    "message": "Τεστ1",
-                    "date": "datetest",
-                    "by": "56",
-                    "to": "10433999",
-                    "seen": "yes",
-                    "type": "text"
-                },
-                {
-                    "id": 2,
-                    "message": "Τεστ2",
-                    "date": "datetest2",
-                    "by": "39",
-                    "to": "10433999",
-                    "seen": "yes",
-                    "type": "text"
-                }
-            ]
+            "notifications": []
         },
         {
             "id": "2",
